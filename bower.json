@@ -10,6 +10,7 @@
     "client/lib"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "backbone": "~1.2.3"
   }
 }

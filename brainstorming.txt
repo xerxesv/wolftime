@@ -8,3 +8,9 @@ Two different body types (furry or dude)
   - shirts
   - coats
   - sweet accessories (can be the same for both)
+
+// create dragable parts
+
+// make an image with html to canvas
+
+// save in db
