@@ -18,8 +18,8 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
-  Wolfscum's Fursona Generator
-
+  Awoooooo
+  
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
   Role-playing enthusiasts, fans of the 18th century, and fans of the furry genre can make an avatar for themselves to display on their personal web site or blog.

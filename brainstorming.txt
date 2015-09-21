@@ -11,3 +11,9 @@ Two different body types (furry or dude)
 
 
 needs awesome music in the background
+=======
+// create dragable parts
+
+// make an image with html to canvas
+
+// save in db

@@ -1,0 +1,16 @@
+{
+  "name": "fursona-generator",
+  "version": "0.0.0",
+  "authors": "xerxesv",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/lib"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "backbone": "~1.2.3"
+  }
+}
