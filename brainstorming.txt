@@ -1,0 +1,10 @@
+Two different body types (furry or dude)
+  - some options for the head (different depending on your base type)
+    - eyes 
+    - ears (for the furry)
+    - hairstyle (for the dude)
+    - facial expression
+  - pants
+  - shirts
+  - coats
+  - sweet accessories (can be the same for both)
