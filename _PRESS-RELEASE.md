@@ -18,7 +18,7 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
-  Wolfscum's Generator
+  Wolfscum's Fursona Generator
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
@@ -51,4 +51,3 @@ Once the project moves into development, the press release can be used as a touc
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
   Go to http://localhost:8000 on my computer to check it out!!!
-  
