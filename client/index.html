@@ -63,6 +63,7 @@
       $('.container-fluid').append(new AppView({ model: new AppModel()}).render());
       
       var $draggable = $('.draggable');
+      console.log('draggablenow :', $draggable);
       $draggable.on('mousedown', function (e) {
         var $theItem = $(this);
         var yOffset = e.pageY - $theItem.offset().top;
