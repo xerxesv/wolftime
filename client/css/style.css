@@ -1,6 +1,6 @@
 #canvas {
   background-color: red;
-  background-image: url('../img/_default_man.png');
+  /*background-image: url('../img/_default_man.png');*/
   background-size: contain;
   background-repeat: no-repeat;
 

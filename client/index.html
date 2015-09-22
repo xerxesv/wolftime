@@ -25,46 +25,50 @@
           <h1>Awoooooo</h1>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6" id="canvas">
-          
-        </div>
-        <div class="col-md-6" id="toolbox">
-          toolbox
-          <div class="draggable dollItem jacket"></div>
 
+<!--       <div class="row" id="app">
+        <div class="col-md-6" id="canvas">
+        </div>
+
+        <div class="col-md-6" id="toolbox">
+          <div>jackets | pants | stuff</div>
+          <div>
+            <div class="draggable dollItem jacket"></div>
+          </div>
         </div>
       </div>
+ -->
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/underscore/underscore-min.js"></script>
     <script src="./lib/backbone/backbone-min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script src="./js/models/AppModel.js"></script>
+    <script src="./js/models/DollModel.js"></script>
+
+    <script src="./js/views/AppView.js"></script>
+    <script src="./js/views/DollView.js"></script>
+
     <script>
-    $(document).ready(function(){
-      var $draggable = $('.draggable');
-      // var makeMoveable = function (mouseMoveEvent, $element) {
-      //   $(document).on('mousemove', function (e) {
-      //     $element.offset({'top': e.pageY, 'left': e.pageX})
-          
-      //   })
-      // };
-      // $draggable.on ('click', function (e) {
-      //   console.log($(this));
-      // })
-      $draggable.on('mousedown', function (e) {
-        var yOffset = e.pageY - $draggable.offset().top;
-        var xOffset = e.pageX - $draggable.offset().left;
-        $(document).on('mousemove', function (mouseMoveE) {
-          $draggable.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
-        });
-      });
-      $draggable.on('mouseup', function (e) {
-        $(document).off('mousemove');
-      });
+    $(document).ready(function () {
+      $('.container-fluid').append('from index');
+      $('.container-fluid').append(new AppView({ model: new AppModel()}).render());
+      
+      // var $draggable = $('.draggable');
+      // $draggable.on('mousedown', function (e) {
+      //   var yOffset = e.pageY - $draggable.offset().top;
+      //   var xOffset = e.pageX - $draggable.offset().left;
+      //   $(document).on('mousemove', function (mouseMoveE) {
+      //     $draggable.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
+      //   });
+      // });
+      // $draggable.on('mouseup', function (e) {
+      //   $(document).off('mousemove');
+      // });
 
     });
     </script>
