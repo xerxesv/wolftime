@@ -5,29 +5,30 @@ var AppView = Backbone.View.extend({
     class: "row"
   },
 
-  dollItemsTemplate: _.template('<div>JACKET</div>'),
+  template: _.template('<div>JACKET</div>'),
 
   initialize: function () {
 
     this.dollView = new DollView({
       model: new DollModel({baseSrc: '_default_man.png'})
     });
+    this.toolboxView = new ToolBoxView({model: this.model });
+    this.curCollectionView = new CurCollectionView({collection: this.model.get('curCollection')});
 
-    this.$toolbox = $('<div class="col-md-6" id="toolbox"><ul></ul></div>');
-
-    for (var collectionName in this.model.get('collections')){
-      console.log("colname: ", collectionName);
-      this.$toolbox.children('ul').append('<li>'+collectionName+'</li>');
-    }
-
-
-    this.render();
+    this.model.on('change:curCollection', function () {
+      console.log('current collection has changed');
+      this.curCollectionView = new CurCollectionView({collection: this.model.get('curCollection')});
+      this.render();
+    }, this);
   },
 
   render: function () {
+    this.$el.children().detach();
+    console.log('rendering app...' + this.toolboxView.$el)
     return this.$el.html([
-      this.dollView.$el,
-      this.$toolbox
+      this.dollView.render(),
+      this.toolboxView.render(),
+      this.curCollectionView.render()
     ]);
   }
 });

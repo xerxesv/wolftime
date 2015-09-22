@@ -47,28 +47,33 @@
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
-    <script src="./js/models/AppModel.js"></script>
-    <script src="./js/models/DollModel.js"></script>
+    <script src="./js/models/ItemModel.js"></script>
+    <script src="./js/collections/Clothing.js"></script>
+    <script src="./js/views/ItemView.js"></script>
 
-    <script src="./js/views/AppView.js"></script>
+    <script src="./js/models/DollModel.js"></script>
     <script src="./js/views/DollView.js"></script>
+
+    <script src="./js/models/AppModel.js"></script>
+    <script src="./js/views/AppView.js"></script>
 
     <script>
     $(document).ready(function () {
       $('.container-fluid').append('from index');
       $('.container-fluid').append(new AppView({ model: new AppModel()}).render());
       
-      // var $draggable = $('.draggable');
-      // $draggable.on('mousedown', function (e) {
-      //   var yOffset = e.pageY - $draggable.offset().top;
-      //   var xOffset = e.pageX - $draggable.offset().left;
-      //   $(document).on('mousemove', function (mouseMoveE) {
-      //     $draggable.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
-      //   });
-      // });
-      // $draggable.on('mouseup', function (e) {
-      //   $(document).off('mousemove');
-      // });
+      var $draggable = $('.draggable');
+      $draggable.on('mousedown', function (e) {
+        var $theItem = $(this);
+        var yOffset = e.pageY - $theItem.offset().top;
+        var xOffset = e.pageX - $theItem.offset().left;
+        $(document).on('mousemove', function (mouseMoveE) {
+          $theItem.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
+        });
+      });
+      $draggable.on('mouseup', function (e) {
+        $(document).off('mousemove');
+      });
 
     });
     </script>
