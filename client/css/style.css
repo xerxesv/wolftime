@@ -5,5 +5,15 @@
   background-repeat: no-repeat;
 
   min-height:600px;
+}
 
+.dollItem {
+  position: absolute;
+
+  background-image: url('../img/_jacket1.png');
+  background-size: contain;
+  min-width: 244px;
+  min-height: 306px;
+
+  z-index: 5;
 }
