@@ -8,11 +8,18 @@ var AppView = Backbone.View.extend({
   dollItemsTemplate: _.template('<div>JACKET</div>'),
 
   initialize: function () {
+
     this.dollView = new DollView({
       model: new DollModel({baseSrc: '_default_man.png'})
     });
 
-    this.$toolbox = $('<div class="col-md-6" id="toolbox">TOllbox yo</div>')
+    this.$toolbox = $('<div class="col-md-6" id="toolbox"><ul></ul></div>');
+
+    for (var collectionName in this.model.get('collections')){
+      console.log("colname: ", collectionName);
+      this.$toolbox.children('ul').append('<li>'+collectionName+'</li>');
+    }
+
 
     this.render();
   },

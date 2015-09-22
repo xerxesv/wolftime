@@ -7,7 +7,6 @@ var DollView = Backbone.View.extend({
 
   initialize: function () {
     var srcstr = 'url("./img/' + this.model.get('baseSrc') + '")';
-    console.log("base: ", srcstr);
     this.$el.css('background-image', srcstr);
     this.render();
   },

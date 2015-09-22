@@ -1,5 +1,5 @@
 var DollModel = Backbone.Model.extend({
   defaults: {
-    base: 'foo'
+    baseSrc: '_default_man.png'
   }
 });
