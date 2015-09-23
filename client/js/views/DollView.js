@@ -23,7 +23,7 @@ var CurCollectionView = Backbone.View.extend({
   },
 
   initialize: function () {
-    this.$el.append(
+    this.$el.html(
       this.collection.map(function (item, index) {
         var itemView = new ItemView( {model: item});
         itemView.$el.css('left', index*40 + 'px');
@@ -31,12 +31,16 @@ var CurCollectionView = Backbone.View.extend({
         itemView.$el.css('z-index', index);
         return itemView.$el;
       })
-    );    
+    ); 
+
+    this.collection.on("remove", function (model, collection) {
+      console.log('a model has been removed says teh collection');
+      this.render();
+    }, this);   
   },
 
   render: function () {
-    this.$el.children().detach();
-    this.$el.append(
+    this.$el.html(
       this.collection.map(function (item, index) {
         var itemView = new ItemView( {model: item});
         itemView.$el.css('left', index*40 + 'px');
@@ -72,7 +76,6 @@ var ToolBoxView = Backbone.View.extend({
     console.log('clicknig');
     var switchTo = e.currentTarget.className;
     this.model.set('curCollection', this.model.get('collections')[switchTo]);
-    console.log(this.model.get('curCollection'));
   },
 
   render: function () {

@@ -59,22 +59,10 @@
 
     <script>
     $(document).ready(function () {
-      $('.container-fluid').append('from index');
-      $('.container-fluid').append(new AppView({ model: new AppModel()}).render());
+      var appView = new AppView( { model: new AppModel() } );
+      $('.container-fluid').append(appView.render());
       
-      var $draggable = $('.draggable');
-      console.log('draggablenow :', $draggable);
-      $draggable.on('mousedown', function (e) {
-        var $theItem = $(this);
-        var yOffset = e.pageY - $theItem.offset().top;
-        var xOffset = e.pageX - $theItem.offset().left;
-        $(document).on('mousemove', function (mouseMoveE) {
-          $theItem.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
-        });
-      });
-      $draggable.on('mouseup', function (e) {
-        $(document).off('mousemove');
-      });
+
 
     });
     </script>

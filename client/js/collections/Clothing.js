@@ -1,3 +1,8 @@
 var Clothing = Backbone.Collection.extend({
-  model: ItemModel
+  model: ItemModel,
+
+  initialize: function () {
+    
+
+  }
 });
