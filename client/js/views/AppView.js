@@ -30,7 +30,7 @@ var AppView = Backbone.View.extend({
         var canvasBottom = this.dollView.$el.offset().top + this.dollView.$el.height();
         
         var canvasLeft = this.dollView.$el.offset().left;
-        var canvasRight = this.dollView.$el.offset().left + this.dollView.$el.height();
+        var canvasRight = this.dollView.$el.offset().left + this.dollView.$el.width();
 
         if (model.get('coords').x > canvasLeft && model.get('coords').x < canvasRight && model.get('coords').y > canvasTop && model.get('coords').y < canvasBottom){
           console.log('model removed');

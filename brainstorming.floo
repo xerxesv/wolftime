@@ -1,0 +1,35 @@
+Two different body types (furry or dude)
+  - some options for the head (different depending on your base type)
+    - eyes 
+    - ears (for the furry)
+    - hairstyle (for the dude)
+    - facial expression
+  - pants
+  - shirts
+  - coats
+  - sweet accessories (can be the same for both)
+
+
+needs awesome music in the background
+=======
+// create dragable parts
+
+// make an image with html to canvas
+
+// save in db
+
+====
+TO DO
+
+
+- clothing item "snaps" to appropriate place on the model (determined by xy coordinates on the model and xy coordinates of each item) (sound effect?)
+  - determine size of model, make sure it's relative to screen size
+  - size of each item, make sure it's relative to screen size
+  
+
+
+- the model can have 1 item of some types, more than 1 of other types (e.g. jewelry)
+  - when amount of items per type is exceeded, the new type replaces the old type, old type gets put back in 'toolbox'
+
+
+- you can save your doll model to DB

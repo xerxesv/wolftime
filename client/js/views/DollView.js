@@ -35,7 +35,7 @@ var CurCollectionView = Backbone.View.extend({
 
     this.collection.on("remove", function (model, collection) {
       console.log('a model has been removed says teh collection');
-      this.render();
+     this.render();
     }, this);   
   },
 
@@ -64,12 +64,13 @@ var ToolBoxView = Backbone.View.extend({
   },
 
   initialize: function () {
-    var $collectionNames = $('<ul class="list-inline"></ul>');
+    // this.render();
+    // var $collectionNames = $('<ul class="list-inline"></ul>');
 
-    $collectionNames.append(_.map(this.model.get('collections'), function (collection, collectionName) {
-      return '<li><a href="#" class="'+collectionName+'">' + collectionName + '</a></li>';
-    }));
-    this.$el.append($collectionNames);
+    // $collectionNames.append(_.map(this.model.get('collections'), function (collection, collectionName) {
+    //   return '<li><a href="#" class="'+collectionName+'">' + collectionName + '</a></li>';
+    // }));
+    // this.$el.append($collectionNames);
   },
 
   switchCollection: function (e) {
@@ -79,7 +80,11 @@ var ToolBoxView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.children().detach();
+    if (this.$el.children().length>0) {
+      this.$el.children().detach();
+    } else {
+      console.log('no children in this $el');
+    }
     var $collectionNames = $('<ul class="list-inline"></ul>');
     $collectionNames.append(_.map(this.model.get('collections'), function (collection, collectionName) {
       return '<li><a href="#" class="'+collectionName+'">' + collectionName + '</a></li>';
