@@ -1,5 +1,6 @@
 var ItemModel = Backbone.Model.extend({
   defaults: {
+    baseSrc: '_jacket1.png',
     name: "",
     draggable: true,
     imgSrc: "",

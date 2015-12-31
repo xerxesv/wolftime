@@ -5,22 +5,29 @@ var AppView = Backbone.View.extend({
     class: "row"
   },
 
-  template: _.template('<div>JACKET</div>'),
-
   initialize: function () {
 
     this.dollView = new DollView({
-      model: new DollModel({baseSrc: '_default_man.png'})
+      model: new DollModel({baseSrc: '_default_man.png'}),
+      el: $('#canvas')
     });
-    this.toolboxView = new ToolBoxView({model: this.model });
-    this.curCollectionView = new CurCollectionView({collection: this.model.get('curCollection')});
+    this.toolboxView = new ToolBoxView({
+      model: this.model, 
+      el: $('#toolbox') 
+    });
+    this.curCollectionView = new CurCollectionView({
+      collection: this.model.get('curCollection'), 
+      el:$('#curCollection')
+    });
 
 
     this.model.on('change:curCollection', function () {
       console.log('current collection has changed');
-      this.curCollectionView = new CurCollectionView({collection: this.model.get('curCollection')});
-      this.$el.children('#curCollection').remove();
-      this.$el.append(this.curCollectionView.render());
+      this.curCollectionView = new CurCollectionView({
+        collection: this.model.get('curCollection'),
+        el:$('#curCollection')        
+      });
+      this.curCollectionView.render();
     }, this);
 
     _.each(this.model.get('collections'), function (collection) {
@@ -43,12 +50,10 @@ var AppView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.children().detach();
-    return this.$el.html([
-      this.dollView.render(),
-      this.toolboxView.render(),
-      this.curCollectionView.render()
-    ]);
+      //Re-renders everything rather than re-rendering views on an individual basis. Will rarely be needed.
+      this.dollView.render();
+      this.toolboxView.render();
+      this.curCollectionView.render();
   }
 
 });

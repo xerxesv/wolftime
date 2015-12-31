@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>AWOOOOO</title>
+    <title>WOLFTIME</title>
 
-    <!-- Bootstrap -->
-    <link href="./lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -17,52 +15,56 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12" id="header">
-          <h1>Awoooooo</h1>
-        </div>
-      </div>
 
-<!--       <div class="row" id="app">
-        <div class="col-md-6" id="canvas">
-        </div>
-
-        <div class="col-md-6" id="toolbox">
-          <div>jackets | pants | stuff</div>
-          <div>
-            <div class="draggable dollItem jacket"></div>
-          </div>
-        </div>
-      </div>
- -->
-    </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Javascripts libraries -->
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/underscore/underscore-min.js"></script>
     <script src="./lib/backbone/backbone-min.js"></script>
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
+    <!-- Javascript sourcefiles -->
     <script src="./js/models/ItemModel.js"></script>
     <script src="./js/collections/Clothing.js"></script>
-    <script src="./js/views/ItemView.js"></script>
 
     <script src="./js/models/DollModel.js"></script>
+    <script src="./js/models/AppModel.js"></script>
+
+    <script src="./js/views/ItemView.js"></script>
     <script src="./js/views/DollView.js"></script>
 
-    <script src="./js/models/AppModel.js"></script>
+    <script src="./js/views/ToolBoxView.js"></script>
+    <script src="./js/views/CurCollectionView.js"></script>
     <script src="./js/views/AppView.js"></script>
+
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="appTitle">
+        <h1>
+          WOLFTIME
+        </h1>
+      </div>
+
+      <div id="innerWrapper">
+        <div id="canvas">
+        </div>
+        
+        <div id="controls">
+          <div id="toolbox">
+          </div>
+          
+          <div id="curCollection">
+            current stuffaf
+
+          </div>
+        </div>
+      
+      </div>
+    </div>
 
     <script>
     $(document).ready(function () {
-      var appView = new AppView( { model: new AppModel() } );
-      $('.container-fluid').append(appView.render());
-      
-
+      var appView = new AppView( { model: new AppModel(), el: $('#wrapper') } );
 
     });
     </script>

@@ -1,19 +1,127 @@
-#canvas {
-  background-color: red;
-  /*background-image: url('../img/_default_man.png');*/
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  min-height:600px;
+/* global settings */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
 }
 
+div {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin:.25em;
+}
+
+/* layout */
+
+
+#wrapper {
+  display: table;
+  
+  width: 100%;
+  height: 100%;
+  min-height: 400px
+}
+
+#appTitle {
+  display: table-row;
+  width:100%;
+
+  vertical-align: middle;
+
+  height:1.2em;
+
+}
+
+#innerWrapper {
+  display:table-row;
+}
+
+  #canvas {
+    display: table-cell;
+    background-color: red;
+
+    width:40%;
+    min-width: 330px;
+
+    vertical-align: middle;
+    text-align: center;
+
+    padding:20px;
+  }
+
+  #canvas .doll {
+    height:100%;
+    width:auto;
+  }
+
+
+  #controls {
+    display:table-cell;
+    background-color: blue;
+
+    min-width: 400px;
+  }
+
+    #toolbox {
+      width: 100%;
+      clear:both;
+      background-color: green;
+
+      padding:10px;
+    }
+
+    #curCollection {
+      position:relative;
+      width: 100%;
+      clear:both;
+
+      min-height: 50px;
+      background-color:orange;
+      padding:20px;
+    }
+/* navigation list */
+#toolbox ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+text-align: center;
+}
+
+#toolbox ul li { display: inline; }
+
+#toolbox ul li a
+{
+text-decoration: none;
+padding: .2em 1em;
+color: #fff;
+background-color: #036;
+}
+
+#toolbox ul li + li {
+  margin-left:1em;
+}
+#toolbox ul li a:hover
+{
+color: #fff;
+background-color: #369;
+}
+
+
+/* clothing items */
 .dollItem {
   position: absolute;
 
-  background-image: url('../img/_jacket1.png');
   background-size: contain;
   min-width: 244px;
   min-height: 306px;
 
   z-index: 5;
 }
+
+
+

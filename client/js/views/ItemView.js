@@ -5,6 +5,7 @@ var ItemView = Backbone.View.extend({
   },
 
   initialize: function () {
+    this.$el.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
     this.$el.attr('id', this.model.get('name'));
     if (this.model.get('draggable')) {
       this.$el.addClass('draggable');
