@@ -107,7 +107,7 @@ background-color: #369;
 }
 
 
-/* divs with graphical backgrounds */
+/* divs involved in dynamic moving/dragging */
 
 #canvas .doll {
   position: relative;
@@ -119,6 +119,13 @@ background-color: #369;
   
 /*  height:100%;
   width:auto;*/
+}
+
+.region {
+  position:absolute;
+
+  background-color:blue;
+  opacity:.5;
 }
 
 .dollItem {
