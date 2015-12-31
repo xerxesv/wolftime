@@ -117,8 +117,9 @@ background-color: #369;
   position: absolute;
 
   background-size: contain;
-  min-width: 244px;
-  min-height: 306px;
+  background-repeat: no-repeat;
+/*  min-width: 300px;
+  min-height: 300px;*/
 
   z-index: 5;
 }

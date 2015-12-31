@@ -5,6 +5,13 @@ var ItemView = Backbone.View.extend({
   },
 
   initialize: function () {
+    var img = new Image();
+    img.src = './img/' + this.model.get('baseSrc');
+    img.addEventListener('load', function (e) {
+      this.$el.css('min-width', e.target.width + 'px');
+      this.$el.css('min-height', e.target.height + 'px');
+    }.bind(this) );
+
     this.$el.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
     this.$el.attr('id', this.model.get('name'));
     if (this.model.get('draggable')) {
