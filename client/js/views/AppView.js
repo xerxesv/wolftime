@@ -8,7 +8,7 @@ var AppView = Backbone.View.extend({
   initialize: function () {
 
     this.dollView = new DollView({
-      model: new DollModel({baseSrc: '_default_man.png'}),
+      model: new DollModel({baseSrc: '_default_man1.png'}),
       el: $('#canvas')
     });
     this.toolboxView = new ToolBoxView({
@@ -30,7 +30,7 @@ var AppView = Backbone.View.extend({
       this.curCollectionView.render();
     }, this);
 
-    _.each(this.model.get('collections'), function (collection) {
+    _.each(this.model.get('collections'), function (collection, key) {
       collection.on('change:coords', function (model) {        
         
         var canvasTop = this.dollView.$el.offset().top;

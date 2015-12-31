@@ -53,11 +53,6 @@ h1 {
     padding:20px;
   }
 
-  #canvas .doll {
-    height:100%;
-    width:auto;
-  }
-
 
   #controls {
     display:table-cell;
@@ -112,7 +107,20 @@ background-color: #369;
 }
 
 
-/* clothing items */
+/* divs with graphical backgrounds */
+
+#canvas .doll {
+  position: relative;
+
+  margin:auto;
+
+  background-size:contain;
+  background-repeat: no-repeat;
+  
+/*  height:100%;
+  width:auto;*/
+}
+
 .dollItem {
   position: absolute;
 

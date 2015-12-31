@@ -5,14 +5,9 @@ var ItemView = Backbone.View.extend({
   },
 
   initialize: function () {
-    var img = new Image();
-    img.src = './img/' + this.model.get('baseSrc');
-    img.addEventListener('load', function (e) {
-      this.$el.css('min-width', e.target.width + 'px');
-      this.$el.css('min-height', e.target.height + 'px');
-    }.bind(this) );
 
-    this.$el.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
+    this.render();
+    
     this.$el.attr('id', this.model.get('name'));
     if (this.model.get('draggable')) {
       this.$el.addClass('draggable');
@@ -41,6 +36,16 @@ var ItemView = Backbone.View.extend({
   },
 
   render: function () {
+    // preloads image and adjusts div width and height to fit image
+    // then sets (cached?) image as background of div
+    var img = new Image();
+    img.src = './img/' + this.model.get('baseSrc');
+    img.addEventListener('load', function (e) {
+      this.$el.css('min-width', e.target.width + 'px');
+      this.$el.css('min-height', e.target.height + 'px');
+    }.bind(this) );
+    this.$el.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
+
     return this.$el;
   }
 
