@@ -8,7 +8,10 @@ var AppModel = Backbone.Model.extend({
   },
 
   initialize: function () {
-    this.set('curCollection', this.get('collections')['tails']); 
+    var curCollection = this.get('collections')['tails'];
+    curCollection.setMeta('type', 'tails');
+
+    this.set('curCollection', curCollection); 
 
   }
 
