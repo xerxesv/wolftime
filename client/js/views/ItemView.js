@@ -7,7 +7,7 @@ var ItemView = Backbone.View.extend({
   initialize: function () {
 
     this.render();
-    
+
     this.$el.attr('id', this.model.get('name'));
     if (this.model.get('draggable')) {
       this.$el.addClass('draggable');
@@ -28,7 +28,6 @@ var ItemView = Backbone.View.extend({
       e.data.model.set('coords', {x: $theItem.offset().left, y: $theItem.offset().top, z: $theItem.css('z-index')});
 
       console.log('the models attributes: ', e.data.model.attributes);
-      // register the item x, y, and z coords on the Item Model
 
     });
 

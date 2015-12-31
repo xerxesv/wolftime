@@ -13,7 +13,6 @@ var ToolBoxView = Backbone.View.extend({
     console.log('clicknig');
     var switchTo = e.currentTarget.className;
     var curCollection = this.model.get('collections')[switchTo];
-    curCollection.setMeta('type',switchTo);
 
     // console.log('cur collection type: ', curCollection.getMeta('type'))
     this.model.set('curCollection', curCollection);

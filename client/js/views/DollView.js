@@ -17,10 +17,10 @@ var DollView = Backbone.View.extend({
     $dollDiv.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
 
     //generate div regions on the doll, for snapping
-    _.each(this.model.get('regions'), function (regions, name) {
-      // regions is an array of 4-element arrays
-      // name is the object key
-      _.each(regions, function (region) {
+    _.each(this.model.get('clothing'), function (clothingType, name) {
+      // clothingType.regions is an array of 4-element arrays
+      // name is the name of the clothing type, e.g. 'coats'
+      _.each(clothingType.regions, function (region) {
         var $div = $('<div></div>');
         $div.addClass('region');
         $div.addClass(name);

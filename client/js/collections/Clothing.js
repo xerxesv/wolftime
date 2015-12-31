@@ -8,6 +8,7 @@ var Clothing = Backbone.Collection.extend({
 
   setMeta: function (key, value) {
     this._meta[key] = value;
+    return this;
   },
 
   getMeta: function (key) {

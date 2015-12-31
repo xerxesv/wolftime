@@ -20,7 +20,7 @@ var CurCollectionView = Backbone.View.extend({
         var itemView = new ItemView( {model: item});
         itemView.$el.css('left', index*40 + 'px');
         itemView.$el.css('top', index*20 + 'px');
-        itemView.$el.css('z-index', index);
+        itemView.$el.css('z-index', this.collection.getMeta('z-base') + index);
         return itemView.$el;
       }, this)
     );

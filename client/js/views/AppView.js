@@ -42,13 +42,19 @@ var AppView = Backbone.View.extend({
         var regionLeft = $region.offset().left;
         var regionRight = $region.offset().left + $region.width();
 
-        console.log('model x: ', model.get('coords').x, ',', model.get('coords').y );
-        console.log('region x', regionLeft, ',', regionRight);        
-        console.log('region y', regionTop, ',', regionBottom);
-        
+        console.log('model x,y: ', model.get('coords').x, ',', model.get('coords').y );
+        console.log('region left,right', regionLeft, ',', regionRight);        
+        console.log('region top,bottom', regionTop, ',', regionBottom);
+
         if (model.get('coords').x > regionLeft && model.get('coords').x < regionRight && model.get('coords').y > regionTop && model.get('coords').y < regionBottom){
           console.log('in the region ');
-          collection.remove(model);
+          console.log(this.dollView.model);
+          var clothingSlot = this.dollView.model.get('clothing')[key];
+          if( clothingSlot.items.length === clothingSlot.regions.length ) {
+            var removed = clothingSlot.items.shift()
+          }
+          clothingSlot.items.push( collection.remove(model) );
+          console.log(this.dollView.model.get('clothing'));
         }
 
       }, this);
