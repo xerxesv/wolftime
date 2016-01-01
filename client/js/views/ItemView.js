@@ -6,8 +6,6 @@ var ItemView = Backbone.View.extend({
 
   initialize: function () {
 
-    this.render();
-
     this.$el.attr('id', this.model.get('name'));
     if (this.model.get('draggable')) {
       this.$el.addClass('draggable');
@@ -27,10 +25,12 @@ var ItemView = Backbone.View.extend({
       var $theItem = $(this);
       e.data.model.set('coords', {x: $theItem.offset().left, y: $theItem.offset().top, z: $theItem.css('z-index')});
 
-      console.log('the models attributes: ', e.data.model.attributes);
+      // console.log('the models attributes: ', e.data.model.attributes);
+      console.log('the models coordinats: ', e.data.model.attributes.coords.x, ',', e.data.model.attributes.coords.y);
 
     });
 
+    this.render();
 
   },
 

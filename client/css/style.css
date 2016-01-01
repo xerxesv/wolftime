@@ -8,6 +8,8 @@ html, body {
 }
 
 div {
+  position:relative;
+  z-index:0;
   box-sizing: border-box;
 }
 
@@ -77,10 +79,10 @@ h1 {
       min-height: 50px;
       background-color:orange;
       padding:20px;
+      z-index: 0;
     }
 /* navigation list */
-#toolbox ul
-{
+#toolbox ul {
 margin: 0;
 padding: 0;
 list-style-type: none;
@@ -89,8 +91,7 @@ text-align: center;
 
 #toolbox ul li { display: inline; }
 
-#toolbox ul li a
-{
+#toolbox ul li a {
 text-decoration: none;
 padding: .2em 1em;
 color: #fff;
@@ -100,26 +101,15 @@ background-color: #036;
 #toolbox ul li + li {
   margin-left:1em;
 }
-#toolbox ul li a:hover
-{
-color: #fff;
-background-color: #369;
+#toolbox ul li a:hover {
+  color: #fff;
+  background-color: #369;
 }
 
 
 /* divs involved in dynamic moving/dragging */
 
-#canvas .doll {
-  position: relative;
 
-  margin:auto;
-
-  background-size:contain;
-  background-repeat: no-repeat;
-  
-/*  height:100%;
-  width:auto;*/
-}
 
 .region {
   position:absolute;
@@ -128,7 +118,13 @@ background-color: #369;
   opacity:.5;
 }
 
-.dollItem {
+.dollBG {
+  position: relative;
+
+  margin:auto;
+}
+
+.dollDiv, .dollItem {
   position: absolute;
 
   background-size: contain;

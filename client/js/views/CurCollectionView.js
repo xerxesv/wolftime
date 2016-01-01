@@ -1,15 +1,12 @@
 var CurCollectionView = Backbone.View.extend({
 
   initialize: function () {
-    this.render();
-
-    // console.log('the type of collection for this view is: ', this.collection.getMeta('type'));
-
 
     this.collection.on("remove", function (model, collection) {
-      console.log('a model has been removed says teh collection');
-      this.collection.trigger('detachEl', this.detachEl(model));
+      this.collection.trigger('elDetached', this.detachEl(model));
     }, this);   
+
+    this.render();
   },
 
   render: function () {
@@ -19,7 +16,7 @@ var CurCollectionView = Backbone.View.extend({
         var itemView = new ItemView( {model: item});
         itemView.$el.css('left', index*40 + 'px');
         itemView.$el.css('top', index*20 + 'px');
-        itemView.$el.css('z-index', this.collection.getMeta('z-base') + index);
+        itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
         return itemView.$el;
       }, this)
     );
@@ -27,7 +24,7 @@ var CurCollectionView = Backbone.View.extend({
   },
 
   detachEl: function (model) {
-    console.log('detaching element from model: ', $('#' + model.get('name') ));
+    console.log('detaching element from model');
     return $('#' + model.get('name')).detach();
   }
 });

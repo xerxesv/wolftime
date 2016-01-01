@@ -2,7 +2,9 @@ var DollView = Backbone.View.extend({
 
 
   initialize: function () {
-    this.$el.append('<div class="doll"></div>')
+    $dollBG = $('<div class="dollBG"></div>').appendTo(this.$el);
+    $dollDiv = $('<div class="dollDiv"></div>').appendTo($dollBG);
+    $dollDiv.css('z-index', 50);
     this.render();
 
     _.each(this.model.get('clothing'), function (clothingType) {
@@ -14,12 +16,17 @@ var DollView = Backbone.View.extend({
 
   render: function () {
     var img = new Image();
-    var $dollDiv = this.$el.children('.doll');
+    var $dollBG = this.$el.children('.dollBG');
+    var $dollDiv = $dollBG.children('.dollDiv');
+
     img.src = './img/' + this.model.get('baseSrc');
     img.addEventListener('load', function (e) {
+      $dollBG.css('width', e.target.width + 'px');
+      $dollBG.css('height', e.target.height + 'px');
       $dollDiv.css('width', e.target.width + 'px');
       $dollDiv.css('height', e.target.height + 'px');
-    })
+    });
+
     $dollDiv.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
 
     //generate div regions on the doll, for snapping
@@ -34,10 +41,18 @@ var DollView = Backbone.View.extend({
         $div.css('top', region[1] + 'px');
         $div.css('width', region[2] + 'px');
         $div.css('height', region[3] + 'px');
-        $dollDiv.append($div);
+        $div.css('z-index', clothingType.items.getMeta('z-base'));
+        $dollBG.append($div);
       });
     })
-
     return this.$el;
+  },
+
+  detachEl: function () {
+
+  },
+
+  attachEl: function ($element) {
+
   }
 });

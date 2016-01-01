@@ -1,11 +1,11 @@
 var DollModel = Backbone.Model.extend({
   defaults: {
-    baseSrc: '_default_man1.png',
+    baseSrc: '_default_man.png',
 
     clothing: {
-      coats: { regions: [ [0,82,228,178] ], items: new Clothing() }, // regions is an array of arrays with format [topleftX, topleftY, regionwidth, regionheight]
-      pants: { regions: [ [48,211,143,247] ], items: new Clothing() },
-      tails: { regions: [ [0,230,228,270] ], items: new Clothing() }
+      coats: { regions: [ [0,82,228,178] ], items: (new Clothing() ).setMeta('z-base', 200) }, // regions is an array of arrays with format [topleftX, topleftY, regionwidth, regionheight]
+      pants: { regions: [ [48,211,143,247] ], items: (new Clothing()).setMeta('z-base', 100) },
+      tails: { regions: [ [0,230,228,270] ], items: (new Clothing()).setMeta('z-base', 1) }
     }
   }
 });
