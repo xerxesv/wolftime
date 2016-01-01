@@ -8,9 +8,19 @@ var DollView = Backbone.View.extend({
     this.render();
 
     _.each(this.model.get('clothing'), function (clothingType) {
-      clothingType.items.on("add", function (model, collection) {
+      clothingType.items.on('add', function (model, collection) {
         console.log('a model has been added to the clothing collection')
       });
+
+      clothingType.items.on('change:coords', function (model) {
+        var outOfBounds = clothingType.regions.every( function (region) {
+          return !helpers.inBounds(model.get('coords'), region);
+        });
+        if (outOfBounds) {
+          console.log('removed from the dollView, out of bounds');
+        }    
+      })
+
     })
   },
 
