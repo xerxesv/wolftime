@@ -43,6 +43,7 @@ h1 {
 }
 
   #canvas {
+    position: static;
     display: table-cell;
     background-color: red;
 
@@ -57,6 +58,7 @@ h1 {
 
 
   #controls {
+    position: static;
     display:table-cell;
     background-color: blue;
 
@@ -72,7 +74,7 @@ h1 {
     }
 
     #curCollection {
-      position:relative;
+      position:static;
       width: 100%;
       clear:both;
 
@@ -115,7 +117,6 @@ background-color: #036;
   position:absolute;
 
   background-color:blue;
-  opacity:.5;
 }
 
 .dollBG {

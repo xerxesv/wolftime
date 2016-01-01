@@ -10,12 +10,13 @@ var CurCollectionView = Backbone.View.extend({
   },
 
   render: function () {
+    var offset = this.$el.offset();
     this.$el.html(
       this.collection.map(function (item, index) {
         item.set('type', this.collection.getMeta('type'));
         var itemView = new ItemView( {model: item});
-        itemView.$el.css('left', index*40 + 'px');
-        itemView.$el.css('top', index*20 + 'px');
+        itemView.$el.css('left', offset.left + index*40 + 'px');
+        itemView.$el.css('top', offset.top + index*20 + 'px');
         itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
         return itemView.$el;
       }, this)

@@ -18,6 +18,7 @@ var DollView = Backbone.View.extend({
         });
         if (outOfBounds) {
           console.log('removed from the dollView, out of bounds');
+          //how to access the collection itself, clothingType.items???
         }    
       })
 
