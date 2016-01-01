@@ -4,7 +4,12 @@ var CurCollectionView = Backbone.View.extend({
 
     this.collection.on("remove", function (model, collection) {
       this.collection.trigger('elDetached', this.detachEl(model));
-    }, this);   
+    }, this);
+
+    // this.collection.on("add", function () {
+    //   console.log('something added back to ', this.collection.getMeta('type'));
+    //   this.render();
+    // },this)   
 
     this.render();
   },

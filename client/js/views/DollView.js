@@ -17,8 +17,20 @@ var DollView = Backbone.View.extend({
           return !helpers.inBounds(model.get('coords'), region);
         });
         if (outOfBounds) {
-          console.log('removed from the dollView, out of bounds');
-          //how to access the collection itself, clothingType.items???
+          console.log('out of bounds, removing from model');
+          clothingType.items.remove(model)
+          // fire an event to the appView, passing the model and its el (find the el by jquery search of the model's name)
+              // the appView puts the model in its proper collection
+              // the appView detaches the el from the DOM
+                // if the model name doesn't match the type of the current collection
+                  // the el simply disappears, maybe with some animation showing where it's going
+                // if the model matches the type of the current collection
+                  // the app view passes the el to CurCollectionView's' attachEl function, (maybe some animation)
+                
+
+            // if this puts it in the currently selected collection, have the collection rerender (via a listener on CurCollection), maybe animate it going to its new position
+
+            // if it's not in the currently selected col, have it disappear (later with some kind of ok looking animation)
         }    
       })
 
