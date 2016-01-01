@@ -7,6 +7,7 @@ var ItemView = Backbone.View.extend({
   initialize: function () {
 
     this.$el.attr('id', this.model.get('name'));
+    this.$el.addClass(this.model.get('type'));
     if (this.model.get('draggable')) {
       this.$el.addClass('draggable');
     }

@@ -52,7 +52,11 @@ var DollView = Backbone.View.extend({
 
   },
 
-  attachEl: function ($element) {
-
+  attachEl: function ($element, $region) {
+    console.log($element.attr('class').toString().split(' ')[1]);
+    $region = $region || $element.attr('class').toString().split(' ')[1];
+    $element.css('top', 0);
+    $element.css('left', 0);
+    $region.append($element);
   }
 });

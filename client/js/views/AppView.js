@@ -70,11 +70,10 @@ var AppView = Backbone.View.extend({
       // $region === the region
       collection.on('elDetached', function ($element) {
         console.log('elDetached evented detected, a dom element has been detached from the collection');
-        $element.css('top',0);
-        $element.css('left',0);
-        $region.append($element);
+        console.log('attaching it to the doll')
+        this.dollView.attachEl($element, $region);
 
-      });
+      }, this);
 
     }, this);
   },
