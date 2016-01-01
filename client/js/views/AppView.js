@@ -48,16 +48,27 @@ var AppView = Backbone.View.extend({
 
         if (model.get('coords').x > regionLeft && model.get('coords').x < regionRight && model.get('coords').y > regionTop && model.get('coords').y < regionBottom){
           console.log('in the region ');
-          console.log(this.dollView.model);
+          // $region.append(model.$el)
           var clothingSlot = this.dollView.model.get('clothing')[key];
           if( clothingSlot.items.length === clothingSlot.regions.length ) {
-            var removed = clothingSlot.items.shift()
+            var removedItem = clothingSlot.items.shift()
           }
           clothingSlot.items.push( collection.remove(model) );
           console.log(this.dollView.model.get('clothing'));
         }
 
       }, this);
+      
+      // every collection of clothing in the App has this listener
+      // key === key of the collection in question in AppModel
+      // $region === the region
+      collection.on('detachEl', function ($element) {
+        console.log('detachEl evented detected, a dom element has been detached from the collection');
+        $element.css('top',0);
+        $element.css('left',0);
+        $region.append($element);
+
+      });
 
     }, this);
   },

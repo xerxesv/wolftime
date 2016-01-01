@@ -4,6 +4,12 @@ var DollView = Backbone.View.extend({
   initialize: function () {
     this.$el.append('<div class="doll"></div>')
     this.render();
+
+    _.each(this.model.get('clothing'), function (clothingType) {
+      clothingType.items.on("add", function (model, collection) {
+        console.log('a model has been added to the clothing collection')
+      });
+    })
   },
 
   render: function () {
@@ -29,7 +35,7 @@ var DollView = Backbone.View.extend({
         $div.css('width', region[2] + 'px');
         $div.css('height', region[3] + 'px');
         $dollDiv.append($div);
-      })
+      });
     })
 
     return this.$el;

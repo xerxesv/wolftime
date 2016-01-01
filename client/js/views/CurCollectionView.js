@@ -8,8 +8,7 @@ var CurCollectionView = Backbone.View.extend({
 
     this.collection.on("remove", function (model, collection) {
       console.log('a model has been removed says teh collection');
-
-      this.render();
+      this.collection.trigger('detachEl', this.detachEl(model));
     }, this);   
   },
 
@@ -25,5 +24,10 @@ var CurCollectionView = Backbone.View.extend({
       }, this)
     );
     return this.$el;
+  },
+
+  detachEl: function (model) {
+    console.log('detaching element from model: ', $('#' + model.get('name') ));
+    return $('#' + model.get('name')).detach();
   }
 });
