@@ -23,10 +23,23 @@ var CurCollectionView = Backbone.View.extend({
         itemView.$el.css('left', offset.left + index*40 + 'px');
         itemView.$el.css('top', offset.top + index*20 + 'px');
         itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
+        itemView.$el.data('offset', {left: index*40, top:index*20});
+
+        console.log(itemView.$el.data('offset'))
         return itemView.$el;
       }, this)
     );
     return this.$el;
+  },
+
+  resize: function () {
+    var offset = this.$el.offset();
+    this.$el.children('.dollItem').each( function (index) {
+      console.log(offset.left)
+      $(this).css('left', offset.left + $(this).data('offset').left );
+      $(this).css('top', offset.top + $(this).data('offset').top );
+
+    });
   },
 
   detachEl: function (model) {

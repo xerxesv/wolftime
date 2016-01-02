@@ -28,7 +28,7 @@ var AppView = Backbone.View.extend({
         collection: this.model.get('curCollection'),
         el:$('#curCollection')        
       });
-      this.curCollectionView.render();
+      // this.curCollectionView.render();
     }, this);
 
     // Bind listeners to every ItemModel in every clothing collection on the AppModel
@@ -72,6 +72,10 @@ var AppView = Backbone.View.extend({
         }
       }, this);
     }, this);
+
+    $(window).resize( function () {
+      this.curCollectionView.resize();
+    }.bind(this) );
 
   },
 
