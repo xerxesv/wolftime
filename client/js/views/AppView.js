@@ -28,7 +28,6 @@ var AppView = Backbone.View.extend({
         collection: this.model.get('curCollection'),
         el:$('#curCollection')        
       });
-      // this.curCollectionView.render();
     }, this);
 
     // Bind listeners to every ItemModel in every clothing collection on the AppModel
@@ -43,7 +42,7 @@ var AppView = Backbone.View.extend({
           console.log('in the region ');
 
           var clothingSlot = this.dollView.model.get('clothing')[key];
-          if( clothingSlot.items.length === clothingSlot.regions.length ) {
+          if( clothingSlot.items.length === (clothingSlot.max || clothingSlot.regions.length) ) {
             var removedItem = clothingSlot.items.shift()
           }
           clothingSlot.items.push( collection.remove(model) );
