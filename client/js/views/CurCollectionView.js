@@ -1,10 +1,15 @@
 var CurCollectionView = Backbone.View.extend({
-
+  attributes: {
+    id: 'curCollection'
+  },
   initialize: function () {
 
-    this.collection.on("remove", function (model, collection) {
-      this.collection.trigger('elDetached', this.detachEl(model));
-    }, this);
+    if (!this.collection._events || !this.collection._events['remove']) {
+      this.collection.on("remove", function (model, collection) {
+        this.collection.trigger('elDetached', this.detachEl(model));
+      }, this);
+    }
+
 
     // this.collection.on("add", function () {
     //   console.log('something added back to ', this.collection.getMeta('type'));
@@ -16,6 +21,7 @@ var CurCollectionView = Backbone.View.extend({
 
   render: function () {
     var offset = this.$el.offset();
+    this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
     this.$el.html(
       this.collection.map(function (item, index) {
         item.set('type', this.collection.getMeta('type'));
@@ -25,7 +31,6 @@ var CurCollectionView = Backbone.View.extend({
         itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
         itemView.$el.data('offset', {left: index*40, top:index*20});
 
-        console.log(itemView.$el.data('offset'))
         return itemView.$el;
       }, this)
     );
@@ -34,8 +39,8 @@ var CurCollectionView = Backbone.View.extend({
 
   resize: function () {
     var offset = this.$el.offset();
+    this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
     this.$el.children('.dollItem').each( function (index) {
-      console.log(offset.left)
       $(this).css('left', offset.left + $(this).data('offset').left );
       $(this).css('top', offset.top + $(this).data('offset').top );
 

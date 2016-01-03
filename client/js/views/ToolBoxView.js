@@ -1,5 +1,7 @@
 var ToolBoxView = Backbone.View.extend({
-
+  attributes: {
+    id: 'toolbox'
+  },
 
   events: {
     'click li a' : 'switchCollection'
@@ -10,7 +12,6 @@ var ToolBoxView = Backbone.View.extend({
   },
 
   switchCollection: function (e) {
-    console.log('clicknig');
     var switchTo = e.currentTarget.className;
     var curCollection = this.model.get('collections')[switchTo];
 
@@ -19,6 +20,8 @@ var ToolBoxView = Backbone.View.extend({
   },
 
   render: function () {
+    console.log('rendering ToolBoxView');
+    console.log('this.model: ', this.model);
     var $collectionNames = $('<ul class="list-inline"></ul>');
     $collectionNames.append(_.map(this.model.get('collections'), function (collection, collectionName) {
       return '<li><a href="#" class="'+collectionName+'">' + collectionName + '</a></li>';

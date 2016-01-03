@@ -62,7 +62,7 @@ h1 {
     display:table-cell;
     background-color: blue;
 
-    min-width: 400px;
+    min-width: 330px;
   }
 
     #toolbox {
@@ -83,27 +83,35 @@ h1 {
       padding:20px;
       z-index: 0;
     }
+
+#saveLoad {
+  background-color: green;
+  position:absolute;
+  bottom: 10%;
+  right: 10%;
+}
 /* navigation list */
-#toolbox ul {
+#saveLoad ul, #toolbox ul {
 margin: 0;
 padding: 0;
 list-style-type: none;
 text-align: center;
 }
 
-#toolbox ul li { display: inline; }
+#saveLoad ul li, #toolbox ul li { display: inline; }
 
-#toolbox ul li a {
+#saveLoad  ul li a, #toolbox ul li a {
 text-decoration: none;
 padding: .2em 1em;
 color: #fff;
 background-color: #036;
 }
 
-#toolbox ul li + li {
+#saveLoad ul li + li, #toolbox ul li + li {
   margin-left:1em;
 }
-#toolbox ul li a:hover {
+
+#saveLoad ul li a:hover, #toolbox ul li a:hover {
   color: #fff;
   background-color: #369;
 }

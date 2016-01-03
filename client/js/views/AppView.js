@@ -2,7 +2,6 @@ var AppView = Backbone.View.extend({
 
   attributes: {
     id: "app",
-    class: "row"
   },
 
   initialize: function () {
@@ -19,9 +18,11 @@ var AppView = Backbone.View.extend({
       collection: this.model.get('curCollection'), 
       el:$('#curCollection')
     });
+    this.controlsView = new ControlsView({
+      model: this.model,
+      el: $('#saveLoad')
+    });
 
-
-    // Triggered when the user clicks on a link in the ToolBoxView to change the currently selected collection
     this.model.on('change:curCollection', function () {
       console.log('current collection has changed');
       this.curCollectionView = new CurCollectionView({
@@ -29,6 +30,7 @@ var AppView = Backbone.View.extend({
         el:$('#curCollection')        
       });
     }, this);
+
 
     // Bind listeners to every ItemModel in every clothing collection on the AppModel
     _.each(this.model.get('collections'), function (collection, key) {
@@ -78,11 +80,30 @@ var AppView = Backbone.View.extend({
 
   },
 
+
   render: function () {
-      //Re-renders everything rather than re-rendering views on an individual basis. Will rarely be needed.
-      this.dollView.render();
-      this.toolboxView.render();
-      this.curCollectionView.render();
+    this.$el.html('');
+
+    this.$el.append('<div id="toolbox"></div>');
+    
+    
+    this.$el.append('<div id="curCollection"></div>');      
+
+    this.$el.append('<div id="saveLoad"></div>');
+
+    this.toolboxView = new ToolBoxView({
+      model: this.model, 
+      el: $('#toolbox') 
+    });
+    this.curCollectionView = new CurCollectionView({
+      collection: this.model.get('curCollection'), 
+      el:$('#curCollection')
+    });
+    this.controlsView = new ControlsView({
+      model: this.model,
+      el: $('#saveLoad')
+    });
+
   }
 
 });
