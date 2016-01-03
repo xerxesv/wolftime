@@ -1,0 +1,76 @@
+Two different body types (furry or dude)
+  - some options for the head (different depending on your base type)
+    - eyes 
+    - ears (for the furry)
+    - hairstyle (for the dude)
+    - facial expression
+  - pants
+  - shirts
+  - coats
+  - sweet accessories (can be the same for both)
+
+
+needs awesome music in the background
+=======
+// create dragable parts
+
+// make an image with html to canvas
+
+// save in db
+
+
+====
+TO DO
+
+
+Client
+  x be able to put things back in 'toolbox'
+  x push out extra items
+  x show tails and stuff as being behind the man
+  
+  - adjust size of images, snapping areas
+
+  - make assets look less shitty/create a few more assets
+
+  - be able to select things that are behind the pic of the man (maybe if the man is clicked on, trigger mousedown on the element below it??)
+
+  - show which collection is active
+  - what to do if there's more than 1 region
+
+  - jquery animations of items snapping to and from 
+
+--
+
+--
+Create image of the doll
+  - convert divs to canvas
+  - convert canvas to image?
+
+Server
+  - serve client assets from a server
+  - post request sends model data to server and server logs it
+    - name
+    - password
+    - doll model with clothing
+    - image
+
+Backend
+  - Server puts image in archive
+  - Server puts image url into model data
+  - Server puts name, password, and model data into db 
+
+Retrieve
+  - enter username, password
+  - retrieve images from DB
+
+  - put that shit in mongo db
+
+- you can save your doll model to DB
+  - set up mongo db that stores model 
+  - backbone routing
+  - create a flattened image from divs (use some kind of api)
+  - save the model configuration
+
+==
+notes:
+you can bind a backbone view's el to a specific dom element, like this: var view = new View({el: $('#myDivInDom')}), or you can append the view's el to the dom with jQuery
