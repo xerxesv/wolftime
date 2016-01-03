@@ -25,7 +25,8 @@ var ItemView = Backbone.View.extend({
       $(document).off('mousemove');
       var $theItem = $(this);
       var offset = $('#curCollection').offset();
-      e.data.model.set('coords', {x: $theItem.offset().left, y: $theItem.offset().top, z: $theItem.css('z-index')});
+      // e.data.model.set('coords', {x: $theItem.offset().left, y: $theItem.offset().top, z: $theItem.css('z-index')});
+      e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: $theItem.css('z-index')});
 
       $(this).data('offset', {left: $theItem.offset().left - offset.left, top: $theItem.offset().top - offset.top });
       // console.log('the models attributes: ', e.data.model.attributes);
