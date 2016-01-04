@@ -92,7 +92,9 @@ var AppView = Backbone.View.extend({
     }, this);
 
     $(window).resize( function () {
-      this.curCollectionView.resize();
+      if($('#curCollection').length > 0) {
+        this.curCollectionView.resize();
+      }
     }.bind(this) );
 
   },
@@ -100,13 +102,10 @@ var AppView = Backbone.View.extend({
 
   render: function () {
     this.$el.html('');
-
     this.$el.append('<div id="toolbox"></div>');
-    
-    
     this.$el.append('<div id="curCollection"></div>');      
-
     this.$el.append('<div id="saveLoad"></div>')
+
     this.toolboxView = new ToolBoxView({
       model: this.model, 
       el: $('#toolbox') 

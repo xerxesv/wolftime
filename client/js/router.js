@@ -2,7 +2,8 @@ var WolfRouter = Backbone.Router.extend( {
     
     routes: {
       'a/:save': 'save',
-      'a':'index'
+      'a':'index',
+      '':'index'
     }
 });
 

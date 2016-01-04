@@ -90,6 +90,10 @@ h1 {
   bottom: 10%;
   right: 10%;
 }
+
+#formDiv {
+  padding:20px;
+}
 /* navigation list */
 #saveLoad ul, #toolbox ul {
 margin: 0;

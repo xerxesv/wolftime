@@ -17,11 +17,19 @@
     <![endif]-->
     <!-- templates for use in backbone -->
     <script type="text/x-underscore" id="formTemplate">
-    You can <%= action %> your wolfman and <%= string %>
-      <input class='username' type='text' id='username'>
-      <input class='password' type='text' id='password'>
-      <button id="submit">Submit</button>
-      <a href="#a" id="cancel">Cancel</a>
+      <div id="formDiv">
+        <p>
+        You can <%= action %> your wolfman and <%= string %>
+        </p>
+        <p>
+          <input class='username' type='text' id='username' placeholder="Wolfman's name">
+        </p>
+        <p>
+          <input class='password' type='text' id='password' placeholder='Yr password'>
+        </p>
+          <button id="submit">Submit</button>
+          <a href="#a" id="cancel">Cancel</a>
+      </div>
     </script>
 
     <!-- Javascripts libraries -->
@@ -81,7 +89,7 @@
 
     <script>
     $(document).ready(function () {
-      
+
       var appView = new AppView( { model: new AppModel(), el: $('#controls') } );
 
     });
