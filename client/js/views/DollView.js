@@ -38,14 +38,25 @@ var DollView = Backbone.View.extend({
     var $overlays = $dollBG.children('.overlay');
 
     if ($overlays.length > 0) {
+
       $overlays.each( function (index, element) {
+        
         $(this).on('mousedown', function(e) {
+          console.log('overlaymousedown triggered');
           var name = $(this).attr('class').toString().split(' ')[1];
-          
+
           if( $dollBG.children('.region.'+name).children().length > 0) {
+            
+            var jQueryMouseDown = jQuery.Event('mousedown', { pageX: e.pageX, pageY: e.pageY, offsetX: e.offsetX, offsetY: e.offsetY });
+
+
             var $item = $dollBG.children('.region.'+name).children().first();
-            console.log($item.attr('id') );
-            $item.trigger('mousedown');
+            $item.trigger(jQueryMouseDown);
+
+            $(document).on('mouseup', function (docMouseUpEvent) {
+              $(document).off('mouseup');
+              $item.trigger('mouseup');
+            })
           }
           
         });

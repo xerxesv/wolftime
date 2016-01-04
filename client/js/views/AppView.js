@@ -66,7 +66,6 @@ var AppView = Backbone.View.extend({
             var removedItem = clothingSlot.items.shift()
           }
           clothingSlot.items.push( collection.remove(model) );
-          console.log(this.dollView.model.get('clothing'));
         }
 
       }, this);
