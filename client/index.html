@@ -28,12 +28,12 @@
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/underscore/underscore-min.js"></script>
     <script src="./lib/backbone/backbone-min.js"></script>
-    <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./lib/html2canvas/build/html2canvas.js"></script>
     <script src="./lib/dom-to-image.js"></script>
 
     <!-- Javascript sourcefiles -->
     <script src="./js/helpers.js"></script>
+    <script src="./js/router.js"></script>
 
     <script src="./js/models/ItemModel.js"></script>
     <script src="./js/collections/Clothing.js"></script>
@@ -50,7 +50,6 @@
     <script src="./js/views/AppView.js"></script>
     <script src="./js/views/ApiView.js"></script>
 
-    <script src="./js/router.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -82,32 +81,8 @@
 
     <script>
     $(document).ready(function () {
+      
       var appView = new AppView( { model: new AppModel(), el: $('#controls') } );
-
-      var WolfRouter = Backbone.Router.extend( {
-          
-          routes: {
-            'a/:save' : 'save',
-            'a': 'index'
-          },
-
-          save: function (action) {
-            new ApiView( {
-              el: $('#controls'),
-              action: action 
-            });
-          },
-
-          index: function () {
-            if($('toolbox').length < 1) {
-              appView.render();
-            }
-          }
-      });
-
-      var router = new WolfRouter();
-      Backbone.history.start();
-
 
     });
     </script>

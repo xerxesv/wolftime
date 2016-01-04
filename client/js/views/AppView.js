@@ -6,8 +6,10 @@ var AppView = Backbone.View.extend({
 
   initialize: function () {
 
+    var doll = new DollModel({baseSrc: '_default_man.png'});
+        
     this.dollView = new DollView({
-      model: new DollModel({baseSrc: '_default_man.png'}),
+      model: doll,
       el: $('#canvas')
     });
     this.toolboxView = new ToolBoxView({
@@ -22,6 +24,22 @@ var AppView = Backbone.View.extend({
       model: this.model,
       el: $('#saveLoad')
     });
+
+    router.on('route:save', function (action) {
+      new ApiView( {
+        model: doll,
+        el: $('#controls'),
+        action: action 
+      });
+    });
+
+    router.on('route:index', function () {
+      if($('toolbox').length < 1) {
+        this.render();
+      }      
+    }, this);
+
+    Backbone.history.start();
 
     this.model.on('change:curCollection', function () {
       console.log('current collection has changed');
@@ -89,8 +107,7 @@ var AppView = Backbone.View.extend({
     
     this.$el.append('<div id="curCollection"></div>');      
 
-    this.$el.append('<div id="saveLoad"></div>');
-
+    this.$el.append('<div id="saveLoad"></div>')
     this.toolboxView = new ToolBoxView({
       model: this.model, 
       el: $('#toolbox') 

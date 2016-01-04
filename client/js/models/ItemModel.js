@@ -4,7 +4,6 @@ var ItemModel = Backbone.Model.extend({
     name: "",
     type: "",
     draggable: true,
-    imgSrc: "",
     coords: {
       x: 0,
       y: 0,
