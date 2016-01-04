@@ -20,22 +20,37 @@ var DollView = Backbone.View.extend({
         if (outOfBounds) {
           console.log('out of bounds, removing from model');
           clothingType.items.remove(model)
-          // fire an event to the appView, passing the model and its el (find the el by jquery search of the model's name)
-              // the appView puts the model in its proper collection
-              // the appView detaches the el from the DOM
+          // fire a remove event that appModel collections are listening for, passing the model and its el (find the el by jquery search of the model's name)
+          // listener is initialized in appView
+              // the listener puts the model in its proper collection
+              // the listener detaches the el from the DOM
                 // if the model name doesn't match the type of the current collection
                   // the el simply disappears, maybe with some animation showing where it's going
                 // if the model matches the type of the current collection
                   // the app view passes the el to CurCollectionView's' attachEl function, (maybe some animation)
-                
-
             // if this puts it in the currently selected collection, have the collection rerender (via a listener on CurCollection), maybe animate it going to its new position
-
             // if it's not in the currently selected col, have it disappear (later with some kind of ok looking animation)
+
         }    
       })
+    });
+    
+    var $overlays = $dollBG.children('.overlay');
 
-    })
+    if ($overlays.length > 0) {
+      $overlays.each( function (index, element) {
+        $(this).on('mousedown', function(e) {
+          var name = $(this).attr('class').toString().split(' ')[1];
+          
+          if( $dollBG.children('.region.'+name).children().length > 0) {
+            var $item = $dollBG.children('.region.'+name).children().first();
+            console.log($item.attr('id') );
+            $item.trigger('mousedown');
+          }
+          
+        });
+      })
+    }
   },
 
   render: function () {
@@ -54,7 +69,7 @@ var DollView = Backbone.View.extend({
     });
 
     $dollDiv.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
-
+    var topOverlayZ = parseInt($dollDiv.css('z-index'));
     //generate div regions on the doll, for snapping
     _.each(this.model.get('clothing'), function (clothingType, name) {
       // clothingType.regions is an array of 4-element arrays
@@ -69,6 +84,21 @@ var DollView = Backbone.View.extend({
         $div.css('height', region[3] + 'px');
         $div.css('z-index', clothingType.items.getMeta('z-base'));
         $dollBG.append($div);
+  
+        if(clothingType.items.getMeta('z-base') < topOverlayZ ) {
+          topOverlayZ++;
+          var $div = $('<div></div>');
+          $div.addClass('overlay');
+          $div.addClass(name);
+          $div.css('left', region[0] + 'px');
+          $div.css('top', region[1] + 'px');
+          $div.css('width', region[2] + 'px');
+          $div.css('height', region[3] + 'px');
+          $div.css('z-index',  topOverlayZ);
+          $dollBG.append($div);
+
+        }
+        
       });
     })
     return this.$el;

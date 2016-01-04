@@ -13,10 +13,15 @@ var ItemView = Backbone.View.extend({
     }
 
     this.$el.on('mousedown', function (e) {
+
+      console.log('mousedown triggered');
       var $theItem = $(this);
+      console.log('id in listener: ', $theItem.attr('id'));
       var yOffset = e.pageY - $theItem.offset().top;
       var xOffset = e.pageX - $theItem.offset().left;
+      console.log('event: ', e);
       $(document).on('mousemove', function (mouseMoveE) {
+        console.log('triggering document on mousemove');
         $theItem.offset({ top: mouseMoveE.pageY - yOffset, left: mouseMoveE.pageX - xOffset});
       });
     });
@@ -31,8 +36,8 @@ var ItemView = Backbone.View.extend({
       // fix bug for when #curCollection is not in the DOM
       $(this).data('offset', {left: $theItem.offset().left - offset.left, top: $theItem.offset().top - offset.top });
       // console.log('the models attributes: ', e.data.model.attributes);
-      console.log('the models coordinats: ', e.data.model.attributes.coords.x, ',', e.data.model.attributes.coords.y);
-      console.log('the modelss offset: ', $(this).data('offset'));
+      // console.log('the models coordinats: ', e.data.model.attributes.coords.x, ',', e.data.model.attributes.coords.y);
+      // console.log('the modelss offset: ', $(this).data('offset'));
     });
 
     this.render();

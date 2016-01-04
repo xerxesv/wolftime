@@ -17,9 +17,9 @@ var helpers = {
     } else {
       var bounds = this.getBounds(jQueryOrArray);
     }
-    console.log('model x,y: ', coords.x, ',', coords.y );
-    console.log('region left,right', bounds.left, ',', bounds.right);        
-    console.log('region top,bottom', bounds.top, ',', bounds.bottom);
+    // console.log('model x,y: ', coords.x, ',', coords.y );
+    // console.log('region left,right', bounds.left, ',', bounds.right);        
+    // console.log('region top,bottom', bounds.top, ',', bounds.bottom);
 
     return coords.x > bounds.left && coords.x < bounds.right && coords.y > bounds.top && coords.y < bounds.bottom;
   }

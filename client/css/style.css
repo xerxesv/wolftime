@@ -130,11 +130,16 @@ background-color: #036;
 
 
 
-.region {
+.region, .overlay {
   position:absolute;
 /*  background: blue;
   opacity:.5;
 */}
+
+.overlay {
+  background-color: orange;
+  opacity: .5;
+}
 
 #dollContainer {
   margin:auto;
