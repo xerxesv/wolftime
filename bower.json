@@ -1,5 +1,5 @@
 {
-  "name": "fursona-generator",
+  "name": "wolftime",
   "version": "0.0.0",
   "authors": "xerxesv",
   "license": "MIT",
@@ -10,7 +10,6 @@
     "client/lib"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
     "backbone": "~1.2.3",
     "html2canvas": "~0.4.1"
   }

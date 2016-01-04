@@ -2,7 +2,8 @@ var DollView = Backbone.View.extend({
 
 
   initialize: function () {
-    $dollBG = $('<div class="dollBG"></div>').appendTo(this.$el);
+    $dollContainer = $('<div id="dollContainer"></div>').appendTo(this.$el);
+    $dollBG = $('<div id="dollBG"></div>').appendTo($dollContainer);
     $dollDiv = $('<div class="dollDiv"></div>').appendTo($dollBG);
     $dollDiv.css('z-index', 50);
     this.render();
@@ -39,11 +40,13 @@ var DollView = Backbone.View.extend({
 
   render: function () {
     var img = new Image();
-    var $dollBG = this.$el.children('.dollBG');
+    var $dollContainer = this.$el.children('#dollContainer');
+    var $dollBG = $dollContainer.children('#dollBG');
     var $dollDiv = $dollBG.children('.dollDiv');
 
     img.src = './img/' + this.model.get('baseSrc');
     img.addEventListener('load', function (e) {
+      $dollContainer.css('width', e.target.width + 'px');
       $dollBG.css('width', e.target.width + 'px');
       $dollBG.css('height', e.target.height + 'px');
       $dollDiv.css('width', e.target.width + 'px');

@@ -18,12 +18,10 @@
     <!-- templates for use in backbone -->
     <script type="text/x-underscore" id="formTemplate">
     You can <%= action %> your wolfman and <%= string %>
-    <form action="#a">
       <input class='username' type='text' id='username'>
       <input class='password' type='text' id='password'>
-      <input type='submit' value='submit' id='submit'>
-      <input type='submit' value='cancel' id='cancel'>
-    </form>
+      <button id="submit">Submit</button>
+      <a href="#a" id="cancel">Cancel</a>
     </script>
 
     <!-- Javascripts libraries -->
@@ -31,7 +29,8 @@
     <script src="./lib/underscore/underscore-min.js"></script>
     <script src="./lib/backbone/backbone-min.js"></script>
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./lib/html2canvas/build/html2canvas.min.js"></script>
+    <script src="./lib/html2canvas/build/html2canvas.js"></script>
+    <script src="./lib/dom-to-image.js"></script>
 
     <!-- Javascript sourcefiles -->
     <script src="./js/helpers.js"></script>
@@ -93,7 +92,6 @@
           },
 
           save: function (action) {
-            console.log('router action: ', action);
             new ApiView( {
               el: $('#controls'),
               action: action 

@@ -1,0 +1,22 @@
+{
+  "name": "wolftime",
+  "version": "0.0.1",
+  "description": "you can dress up like a wolf!",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xerxesv/wolftime.git"
+  },
+  "author": "xerxesv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xerxesv/wolftime/issues"
+  },
+  "homepage": "https://github.com/xerxesv/wolftime#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
