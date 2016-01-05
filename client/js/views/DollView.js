@@ -46,17 +46,15 @@ var DollView = Backbone.View.extend({
           var name = $(this).attr('class').toString().split(' ')[1];
 
           if( $dollBG.children('.region.'+name).children().length > 0) {
-            
             var jQueryMouseDown = jQuery.Event('mousedown', { pageX: e.pageX, pageY: e.pageY, offsetX: e.offsetX, offsetY: e.offsetY });
-
-
             var $item = $dollBG.children('.region.'+name).children().first();
+
             $item.trigger(jQueryMouseDown);
 
             $(document).on('mouseup', function (docMouseUpEvent) {
               $(document).off('mouseup');
               $item.trigger('mouseup');
-            })
+            });
           }
           
         });

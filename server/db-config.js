@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
+
 console.log('Connecting to mongodb');
 
 if(process.env.NODE_ENV === 'production'){
@@ -10,20 +12,68 @@ if(process.env.NODE_ENV === 'production'){
 
 var db = {};
 
-console.log('Making url schema');
+console.log('Making wolf schema');
 db.wolfSchema = new mongoose.Schema({
-  name:  String,
-  password: String,
-  imgUrl: String,
-  model: {
-    baseSrc: String,
-    clothing: {
-      coats: String,
-      pants: String,
-      tails: String
+  baseSrc: String,
+  clothing: {
+    coats: {
+      items: [{
+      baseSrc: String, 
+      coords: {
+        x: Number, y: Number, z: Number
+      },
+      draggable: Boolean,
+      name: String,
+      topLeftCoords: {
+        x: Number, y: Number
+      },
+      type: String}],
+
+      max: Number,
+
+      regions: [[Number]]
+    },
+    pants: {
+      items: [{
+      baseSrc: String, 
+      coords: {
+        x: Number, y: Number, z: Number
+      },
+      draggable: Boolean,
+      name: String,
+      topLeftCoords: {
+        x: Number, y: Number
+      },
+      type: String}],
+
+      max: Number,
+
+      regions: [[Number]]
+    },
+    tails: {
+      items: [{
+      baseSrc: String, 
+      coords: {
+        x: Number, y: Number, z: Number
+      },
+      draggable: Boolean,
+      name: String,
+      topLeftCoords: {
+        x: Number, y: Number
+      },
+      type: String}],
+
+      max: Number,
+
+      regions: [[Number]]
     }
-  }
+  },
+  imgUrl: String,
+  name:  String,
+  password: String
 });
+
+db.wolfSchema.plugin(findOrCreate);
 
 db.mongoose = mongoose;
 

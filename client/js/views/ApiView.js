@@ -30,7 +30,7 @@ var ApiView = Backbone.View.extend({
     this.model.trigger('dudeSaved', {
       name: this.$el.find('#username').val(), 
       password: this.$el.find('#password').val(), 
-      image: 'an image should be here'
+      imageURL: 'an image should be here'
     });
   },
 

@@ -15,7 +15,6 @@ var DollModel = Backbone.Model.extend({
 
 
     this.on('dudeSaved', function (args) {
-      console.log(args);
       this.set('name', args.name);
       this.set('password', args.password);
       this.set('imageURL', args.imageURL);

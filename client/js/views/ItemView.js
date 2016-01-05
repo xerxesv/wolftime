@@ -16,8 +16,6 @@ var ItemView = Backbone.View.extend({
 
       console.log('mousedown triggered');
       var $theItem = $(this);
-      var yOffset = e.pageY - $theItem.offset().top;
-      var xOffset = e.pageX - $theItem.offset().left;
 
       console.log('event: ', e);
       $(document).on('mousemove', function (mouseMoveE) {
@@ -34,7 +32,7 @@ var ItemView = Backbone.View.extend({
       var $theItem = $(this);
       var offset = $('#curCollection').offset();
       e.data.model.set('topLeftCoords', {x: $theItem.offset().left, y: $theItem.offset().top});
-      e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: $theItem.css('z-index')});
+      e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: parseInt($theItem.css('z-index'))});
 
       // fix bug for when #curCollection is not in the DOM
       $(this).data('offset', {left: $theItem.offset().left - offset.left, top: $theItem.offset().top - offset.top });
