@@ -25,6 +25,7 @@ var CurCollectionView = Backbone.View.extend({
   },
 
   render: function () {
+    //possible performance issue with creating new item views on each render
     var offset = this.$el.offset();
     this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
     this.$el.html(

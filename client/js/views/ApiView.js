@@ -4,18 +4,34 @@ var ApiView = Backbone.View.extend({
 
   initialize: function (options) {
     this.action = options.action;
+
+    this.model.on('dudeSaved', this.dudeSaved, this);
     this.render();
   },
 
   events: {
-    'click #submit' : 'makeImage',
+    'click #submit' : 'clickSubmit',
+  },
+
+
+  clickSubmit: function () {
+    this.makeImage();
+    
+    this.model.trigger('submitClicked', {
+      name: this.$el.find('#username').val(), 
+      password: this.$el.find('#password').val(), 
+      imageURL: 'an image should be here'
+    });
+  },
+
+  dudeSaved: function (imgURL) {
+    console.log('your dude was saved');
+    console.log(imgURL);
   },
 
   makeImage: function () {
     // $node = $('#dollBG').clone();
     // $node.css('margin', 0);
-    console.log('makeImage event happening');
-    
     domtoimage.toPng(document.getElementById('dollBG'))
       .then( function (dataUrl) {
         var img = new Image();
@@ -25,12 +41,6 @@ var ApiView = Backbone.View.extend({
       .catch(function (error) {
         console.error('wooops', error);
       });
-
-    this.model.trigger('dudeSaved', {
-      name: this.$el.find('#username').val(), 
-      password: this.$el.find('#password').val(), 
-      imageURL: 'an image should be here'
-    });
   },
 
   render: function () {

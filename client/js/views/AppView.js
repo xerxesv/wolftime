@@ -25,17 +25,14 @@ var AppView = Backbone.View.extend({
       el: $('#saveLoad')
     });
 
-    router.on('route:save', function (action) {
+    router.on('route:api', function (action) {
+      this.model.set('action', action);
       if (!this.apiView) {
-        console.log('no this.apiView, creating it');
         this.apiView = new ApiView( {
           model: doll,
-          el: $('#controls'),
-          action: action 
+          el: $('#controls')
         });
       } else {
-        console.log('this.apiView exists');
-        console.log(this.apiView);
         this.apiView.render();
       }
     }, this);
@@ -51,9 +48,6 @@ var AppView = Backbone.View.extend({
     Backbone.history.start();
 
     this.model.on('change:curCollection', function (model, value) {
-      console.log('current collection has changed');
-      console.log(value);
-
       this.curCollectionView.switchCollection(value);
     }, this);
 

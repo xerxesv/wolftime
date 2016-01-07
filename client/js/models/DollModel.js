@@ -13,10 +13,7 @@ var DollModel = Backbone.Model.extend({
 
   initialize: function () {
 
-
-    this.on('dudeSaved', function (args) {
-      console.log('dudeSaved');
-
+    this.on('submitClicked', function (args) {
       this.set('name', args.name);
       this.set('password', args.password);
       this.set('imageURL', args.imageURL);
@@ -25,27 +22,23 @@ var DollModel = Backbone.Model.extend({
         processData: false,
         data: this.toJSON(),
         contentType:'application/json',
+        
         success: function (data, status, jqXHR) {
           console.log('success sending post request with jquery ajax');
-          console.log(data, status);
-        },
+          console.log(data, status, jqXHR);
+
+          this.trigger('dudeSaved', data);
+
+
+        }.bind(this),
+
         error: function (jqXHR, status, error) {
           console.log('fail sending post request with jquery ajax');
-        }
+          console.log(jqXHR, status, error); 
+        }.bind(this)
       });
-      
-      // this.save( this.toJSON, {
-      //   success: function (model, response, options) {
-      //     console.log('success saving with model.save');
-      //     console.log('response: ', response);
-      //   },
-      //   error: function (model, response, options) {
-      //     console.log('error saving with model.save');
-      //     console.log('response: ', response);          
-      //   }
-      // });
+    }, this);
 
-    }.bind(this) );
   },
 
   toJSON: function () {
