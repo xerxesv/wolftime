@@ -48,7 +48,6 @@ var CurCollectionView = Backbone.View.extend({
   },
 
   detachEl: function (model) {
-    console.log('detaching element from model');
     return $('#' + model.get('name')).detach();
   }
 });

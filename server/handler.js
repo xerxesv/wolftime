@@ -1,28 +1,30 @@
 var db = require('./db-config');
 var Wolf = require('./db-models.js').Wolf;
+var Wolf2 = require('./db-models.js').Wolf2;
 
 exports.createOrUpdate = function (req, res) {
   //look up a wolf with that name
-  Wolf.findOne({username: req.body.name}, function (err, wolf) {
+  console.log(req.body);
+
+  Wolf2.findOne({name: req.body.name}, function (err, wolf) {
     if (wolf) {
       console.log('a wolf with that name already exits');
-      res.send(300);
+      res.sendStatus(300);
     } else {
-      var wolf = new Wolf(req.body);
+      var wolf = new Wolf2(req.body);
       wolf.save(function (err, newWolf) {
         if (err) {
           console.log('error saving the new wolf!');
           console.log(err);
         } else {
           console.log('new wolf created');
+          res.sendStatus(201);
         }
       })
     }
   })
 
-  console.log('got a post request to /save');
-  console.log(req.body);
-  res.send(200)
+
 };
 
 /* 

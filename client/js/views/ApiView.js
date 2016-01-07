@@ -3,8 +3,6 @@ var ApiView = Backbone.View.extend({
   template: _.template($('#formTemplate').html()),
 
   initialize: function (options) {
-    console.log(this.model.get('baseSrc'));
-
     this.action = options.action;
     this.render();
   },
@@ -21,7 +19,7 @@ var ApiView = Backbone.View.extend({
       .then( function (dataUrl) {
         var img = new Image();
         img.src = dataUrl;
-        document.getElementById('controls').appendChild(img);
+        // document.getElementById('controls').appendChild(img);
       })
       .catch(function (error) {
         console.error('wooops', error);

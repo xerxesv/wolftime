@@ -14,20 +14,14 @@ var ItemView = Backbone.View.extend({
 
     this.$el.on('mousedown', function (e) {
 
-      console.log('mousedown triggered');
       var $theItem = $(this);
 
-      console.log('event: ', e);
       $(document).on('mousemove', function (mouseMoveE) {
-        console.log('triggering document on mousemove');
         $theItem.offset({ top: mouseMoveE.pageY - e.offsetY, left: mouseMoveE.pageX - e.offsetX});
       });
     });
 
     this.$el.on('mouseup', {model: this.model }, function (e) {
-
-      console.log('mouseup triggered, name of the model in mouseup: ', e.data.model.get('name'));
-      console.log(e);
       $(document).off('mousemove');
       var $theItem = $(this);
       var offset = $('#curCollection').offset();

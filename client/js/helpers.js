@@ -22,6 +22,7 @@ var helpers = {
     // console.log('region top,bottom', bounds.top, ',', bounds.bottom);
 
     return coords.x > bounds.left && coords.x < bounds.right && coords.y > bounds.top && coords.y < bounds.bottom;
-  }
-  
+  },
+
+
 };

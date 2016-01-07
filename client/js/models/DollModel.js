@@ -15,21 +15,60 @@ var DollModel = Backbone.Model.extend({
 
 
     this.on('dudeSaved', function (args) {
+      console.log('dudeSaved');
+
       this.set('name', args.name);
       this.set('password', args.password);
       this.set('imageURL', args.imageURL);
-      
-      this.save({ }, {
-        success: function (model, response, options) {
-          console.log('success saving');
+      $.ajax( 'save', {
+        method: 'POST',
+        processData: false,
+        data: this.toJSON(),
+        contentType:'application/json',
+        success: function (data, status, jqXHR) {
+          console.log('success sending post request with jquery ajax');
+          console.log(data, status);
         },
-        error: function (model, response, options) {
-          console.log('error saving');
+        error: function (jqXHR, status, error) {
+          console.log('fail sending post request with jquery ajax');
         }
       });
+      
+      // this.save( this.toJSON, {
+      //   success: function (model, response, options) {
+      //     console.log('success saving with model.save');
+      //     console.log('response: ', response);
+      //   },
+      //   error: function (model, response, options) {
+      //     console.log('error saving with model.save');
+      //     console.log('response: ', response);          
+      //   }
+      // });
 
+    }.bind(this) );
+  },
+
+  toJSON: function () {
+    var json = {
+      baseSrc: this.get('baseSrc'),
+      clothing: {
+        coats: [],
+        tails: [],
+        pants: []
+      },
+      imageURL: this.get('imageURL'),
+      name: this.get('name') || '',
+      password: this.get('password'),
+    };
+
+    _.each( this.get('clothing'), function (clothingObj, key) {
+      // console.log('clothingojb.items: ', clothingObj.items);
+      clothingObj.items.each(function (itemModel) {
+        json.clothing[key].push( itemModel.get('name'));
+      });
     }, this);
-  }
 
+    return JSON.stringify(json);
+  }
 
 });

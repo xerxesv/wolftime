@@ -73,7 +73,20 @@ db.wolfSchema = new mongoose.Schema({
   password: String
 });
 
+db.wolfSchema2 = new mongoose.Schema({
+  baseSrc: String,
+  clothing: {
+    coats: [String],
+    tails: [String],
+    pants: [String]
+  },
+  imageURL: String,
+  name: String,
+  password: String
+});
+
 db.wolfSchema.plugin(findOrCreate);
+db.wolfSchema2.plugin(findOrCreate);
 
 db.mongoose = mongoose;
 

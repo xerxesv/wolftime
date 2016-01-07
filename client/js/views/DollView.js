@@ -10,7 +10,6 @@ var DollView = Backbone.View.extend({
 
     _.each(this.model.get('clothing'), function (clothingType) {
       clothingType.items.on('add', function (model, collection) {
-        console.log('a model has been added to the clothing collection')
       });
 
       clothingType.items.on('change:coords', function (model) {
@@ -18,7 +17,6 @@ var DollView = Backbone.View.extend({
           return !helpers.inBounds(model.get('coords'), region);
         });
         if (outOfBounds) {
-          console.log('out of bounds, removing from model');
           clothingType.items.remove(model)
           // fire a remove event that appModel collections are listening for, passing the model and its el (find the el by jquery search of the model's name)
           // listener is initialized in appView
@@ -118,7 +116,6 @@ var DollView = Backbone.View.extend({
   },
 
   attachEl: function ($element, $region) {
-    console.log($element.attr('class').toString().split(' ')[1]);
     $region = $region || $element.attr('class').toString().split(' ')[1];
     $element.css('top', 0);
     $element.css('left', 0);

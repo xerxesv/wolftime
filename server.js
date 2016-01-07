@@ -9,7 +9,7 @@ var handler = require('./server/handler');
 // Create app, and configure middleware
 var app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/client'));

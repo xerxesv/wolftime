@@ -43,8 +43,8 @@ Client
 
 --
 Create image of the doll
-  - convert divs to canvas
-  - convert canvas to image?
+  - convert divs to canvas, then convert canvas to image?
+  - server side via some external API?
 
 Server
   - serve client assets from a server
