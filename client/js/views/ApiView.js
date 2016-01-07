@@ -14,16 +14,17 @@ var ApiView = Backbone.View.extend({
   makeImage: function () {
     // $node = $('#dollBG').clone();
     // $node.css('margin', 0);
-
-    domtoimage.toPng(document.getElementById('dollBG'))
-      .then( function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-        // document.getElementById('controls').appendChild(img);
-      })
-      .catch(function (error) {
-        console.error('wooops', error);
-      });
+    console.log('makeImage event happening');
+    
+    // domtoimage.toPng(document.getElementById('dollBG'))
+    //   .then( function (dataUrl) {
+    //     var img = new Image();
+    //     img.src = dataUrl;
+    //     // document.getElementById('controls').appendChild(img);
+    //   })
+    //   .catch(function (error) {
+    //     console.error('wooops', error);
+    //   });
 
     this.model.trigger('dudeSaved', {
       name: this.$el.find('#username').val(), 

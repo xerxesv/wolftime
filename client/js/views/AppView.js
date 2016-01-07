@@ -26,12 +26,19 @@ var AppView = Backbone.View.extend({
     });
 
     router.on('route:save', function (action) {
-      new ApiView( {
-        model: doll,
-        el: $('#controls'),
-        action: action 
-      });
-    });
+      if (!this.apiView) {
+        console.log('no this.apiView, creating it');
+        this.apiView = new ApiView( {
+          model: doll,
+          el: $('#controls'),
+          action: action 
+        });
+      } else {
+        console.log('this.apiView exists');
+        console.log(this.apiView);
+        this.apiView.render();
+      }
+    }, this);
 
     router.on('route:index', function () {
       if($('toolbox').length < 1) {
