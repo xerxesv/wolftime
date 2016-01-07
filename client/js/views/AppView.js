@@ -41,7 +41,9 @@ var AppView = Backbone.View.extend({
     }, this);
 
     router.on('route:index', function () {
-      if($('toolbox').length < 1) {
+      if($('#toolbox').length < 1) {
+        console.log('toolbox length < 1');
+        console.log(this.toolboxView);
         this.render();
       }      
     }, this);
@@ -50,10 +52,7 @@ var AppView = Backbone.View.extend({
 
     this.model.on('change:curCollection', function () {
       console.log('current collection has changed');
-      this.curCollectionView = new CurCollectionView({
-        collection: this.model.get('curCollection'),
-        el:$('#curCollection')        
-      });
+      this.curCollectionView.render();
     }, this);
 
 
@@ -107,22 +106,18 @@ var AppView = Backbone.View.extend({
 
   render: function () {
     this.$el.html('');
-    this.$el.append('<div id="toolbox"></div>');
-    this.$el.append('<div id="curCollection"></div>');      
-    this.$el.append('<div id="saveLoad"></div>')
+    $toolbox = $('<div id="toolbox"></div>').appendTo(this.$el);
+    $curCollection = $('<div id="curCollection"></div>').appendTo(this.$el);
+    $saveLoad = $('<div id="saveLoad"></div>').appendTo(this.$el);
 
-    this.toolboxView = new ToolBoxView({
-      model: this.model, 
-      el: $('#toolbox') 
-    });
-    this.curCollectionView = new CurCollectionView({
-      collection: this.model.get('curCollection'), 
-      el:$('#curCollection')
-    });
-    this.controlsView = new ControlsView({
-      model: this.model,
-      el: $('#saveLoad')
-    });
+    this.toolboxView.setElement($toolbox);
+    this.toolboxView.render();
+
+    this.curCollectionView.setElement($curCollection);
+    this.curCollectionView.render();
+
+    this.controlsView.setElement($saveLoad);
+    this.controlsView.render();
 
   }
 
