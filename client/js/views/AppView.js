@@ -50,9 +50,11 @@ var AppView = Backbone.View.extend({
 
     Backbone.history.start();
 
-    this.model.on('change:curCollection', function () {
+    this.model.on('change:curCollection', function (model, value) {
       console.log('current collection has changed');
-      this.curCollectionView.render();
+      console.log(value);
+
+      this.curCollectionView.switchCollection(value);
     }, this);
 
 

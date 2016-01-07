@@ -19,6 +19,11 @@ var CurCollectionView = Backbone.View.extend({
     this.render();
   },
 
+  switchCollection: function (newCollection) {
+    this.collection = newCollection;
+    this.initialize();
+  },
+
   render: function () {
     var offset = this.$el.offset();
     this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
