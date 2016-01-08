@@ -26,11 +26,11 @@ var AppView = Backbone.View.extend({
     });
 
     router.on('route:api', function (action) {
-      this.model.set('action', action);
       if (!this.apiView) {
         this.apiView = new ApiView( {
           model: doll,
-          el: $('#controls')
+          el: $('#controls'),
+          action: action
         });
       } else {
         this.apiView.render();

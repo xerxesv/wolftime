@@ -91,7 +91,7 @@ h1 {
   right: 10%;
 }
 
-#formDiv {
+#controls > div {
   padding:20px;
 }
 /* navigation list */

@@ -14,6 +14,20 @@ var ApiView = Backbone.View.extend({
   },
 
 
+  makeImage: function () {
+    // $node = $('#dollBG').clone();
+    // $node.css('margin', 0);
+    domtoimage.toPng(document.getElementById('dollBG'))
+      .then( function (dataUrl) {
+        var img = new Image();
+        img.src = dataUrl;
+        // document.getElementById('controls').appendChild(img);
+      })
+      .catch(function (error) {
+        console.error('wooops', error);
+      });
+  },
+
   clickSubmit: function () {
     this.makeImage();
     
@@ -25,29 +39,27 @@ var ApiView = Backbone.View.extend({
   },
 
   dudeSaved: function (imgURL) {
+    this.action = 'saved';
     console.log('your dude was saved');
     console.log(imgURL);
+    this.render({imgURL: imgURL});
   },
 
-  makeImage: function () {
-    // $node = $('#dollBG').clone();
-    // $node.css('margin', 0);
-    domtoimage.toPng(document.getElementById('dollBG'))
-      .then( function (dataUrl) {
-        var img = new Image();
-        img.src = dataUrl;
-        document.getElementById('controls').appendChild(img);
-      })
-      .catch(function (error) {
-        console.error('wooops', error);
-      });
-  },
 
-  render: function () {
+  render: function (args) {
     //  automatically empties contents of this.$el
-    this.$el.html( this.template( {
-      action: this.action,
-      string: this.action === 'save' ? 'share him/her with the world.' : 'modify him to suit your needs. '
-    }) );
+    if (this.action === 'save' || this.action === 'retrieve') {
+      this.$el.html( this.template( {
+        action: this.action,
+        string: this.action === 'save' ? 'share him/her with the world.' : 'modify him to suit your needs. '
+      }) );      
+    } else if (this.action === 'saved') {
+      console.log(args.imgURL);
+      this.template = _.template($('#savedTemplate').html());      
+      this.$el.html( this.template( {
+        imgURL: args.imgURL
+      }) );
+    }
+
   }
 });
