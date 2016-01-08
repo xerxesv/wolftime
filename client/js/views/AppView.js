@@ -33,6 +33,7 @@ var AppView = Backbone.View.extend({
           action: action
         });
       } else {
+        this.apiView.action = action;
         this.apiView.render();
       }
     }, this);

@@ -47,6 +47,7 @@ var ApiView = Backbone.View.extend({
 
 
   render: function (args) {
+    console.log('this.action: ', this.action);
     //  automatically empties contents of this.$el
     if (this.action === 'save' || this.action === 'retrieve') {
       this.$el.html( this.template( {
@@ -55,8 +56,8 @@ var ApiView = Backbone.View.extend({
       }) );      
     } else if (this.action === 'saved') {
       console.log(args.imgURL);
-      this.template = _.template($('#savedTemplate').html());      
-      this.$el.html( this.template( {
+      var compiled = _.template($('#savedTemplate').html());      
+      this.$el.html( compiled( {
         imgURL: args.imgURL
       }) );
     }

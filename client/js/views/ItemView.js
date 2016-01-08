@@ -24,11 +24,10 @@ var ItemView = Backbone.View.extend({
     this.$el.on('mouseup', {model: this.model }, function (e) {
       $(document).off('mousemove');
       var $theItem = $(this);
-      var offset = $('#curCollection').offset();
+      var offset = $('#curCollection').length > 0 ? $('#curCollection').offset() : $('#controls').offset();
       e.data.model.set('topLeftCoords', {x: $theItem.offset().left, y: $theItem.offset().top});
       e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: parseInt($theItem.css('z-index'))});
 
-      // fix bug for when #curCollection is not in the DOM
       $(this).data('offset', {left: $theItem.offset().left - offset.left, top: $theItem.offset().top - offset.top });
       // console.log('the models attributes: ', e.data.model.attributes);
       // console.log('the models coordinats: ', e.data.model.attributes.coords.x, ',', e.data.model.attributes.coords.y);
