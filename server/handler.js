@@ -9,7 +9,7 @@ exports.createOrUpdate = function (req, res) {
   Wolf2.findOne({name: req.body.name}, function (err, wolf) {
     if (wolf) {
       console.log('a wolf with that name already exists');
-      res.sendStatus(300);
+      res.status(300).send(wolf);
     } else {
       var wolf = new Wolf2(req.body);
       wolf.save(function (err, newWolf) {

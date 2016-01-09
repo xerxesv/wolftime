@@ -1,6 +1,6 @@
 var ApiView = Backbone.View.extend({
 
-  template: _.template($('#formTemplate').html()),
+  template: window.JST['formTemplate'],
 
   initialize: function (options) {
     this.action = options.action;
@@ -11,7 +11,7 @@ var ApiView = Backbone.View.extend({
 
   events: {
     'click #submit' : 'clickSubmit',
-  },
+  },  
 
 
   makeImage: function () {
@@ -57,7 +57,7 @@ var ApiView = Backbone.View.extend({
     } else if (this.action === 'saved') {
       console.log(args.imgURL);
       var compiled = _.template($('#savedTemplate').html());      
-      this.$el.html( compiled( {
+      this.$el.html( window.JST['savedTemplate']( {
         imgURL: args.imgURL
       }) );
     }

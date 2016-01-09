@@ -34,7 +34,11 @@ var DollModel = Backbone.Model.extend({
 
         error: function (jqXHR, status, error) {
           console.log('fail sending post request with jquery ajax');
-          console.log(jqXHR, status, error); 
+          console.log(jqXHR, status, error);
+          console.log('status: ', jqXHR.status); 
+          if (jqXHR.status===300) {
+            console.log(jqXHR.responseJSON);
+          }
         }.bind(this)
       });
     }, this);

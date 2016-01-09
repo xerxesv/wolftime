@@ -11,9 +11,9 @@ var CurCollectionView = Backbone.View.extend({
     }
 
 
-    // this.collection.on("add", function () {
+    // this.collection.on("add", function (item) {
     //   console.log('something added back to ', this.collection.getMeta('type'));
-    //   this.render();
+    //   console.log(item)
     // },this)   
 
     this.render();
@@ -27,18 +27,39 @@ var CurCollectionView = Backbone.View.extend({
   render: function () {
     //possible performance issue with creating new item views on each render
     var offset = this.$el.offset();
-    this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
+    var elementHeight = this.$el.height( $(window).height() - parseInt($('#toolbox').css('padding')) * 2 - parseInt(this.$el.css('padding')) - offset.top);
+    var elementWidth = this.$el.width();
+  
+    
     this.$el.html(
       this.collection.map(function (item, index) {
         item.set('type', this.collection.getMeta('type'));
         var itemView = new ItemView( {model: item});
-        itemView.$el.css('left', offset.left + index*40 + 'px');
-        itemView.$el.css('top', offset.top + index*20 + 'px');
-        itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
-        itemView.$el.data('offset', {left: index*40, top:index*20});
+        var offset = this.$el.offset();
+        
+        if (itemView.model.get('topLeftCoords').x !== null || itemView.model.get('topLeftCoords').y !== null) {
+          console.log("itemView.model.get('topLeftCoords'): ", itemView.model.get('topLeftCoords').x, ',', itemView.model.get('topLeftCoords').y)
 
+          itemView.$el.css('left', itemView.model.get('topLeftCoords').x + offset.left + 'px');          
+          itemView.$el.css('top', itemView.model.get('topLeftCoords').y + offset.top + 'px');
+
+        } else {
+          console.log('elementWidth: ', elementWidth);
+          console.log('offset:', offset.left, ',', offset.top);
+
+          itemView.$el.css('left', offset.left + 20 + (Math.random() * (elementWidth - 150)) + 'px');
+          itemView.$el.css('top', offset.top + 20 + (Math.floor(index / 5)) * 20 + 'px');
+
+          itemView.model.set('topLeftCoords', {x: parseInt(itemView.$el.css('left')) - offset.left, y: parseInt(itemView.$el.css('top')) - offset.top} );
+        }
+
+
+        itemView.$el.data('offset', {left: itemView.model.get('topLeftCoords').x, top: itemView.model.get('topLeftCoords').y});
+
+        itemView.$el.css('z-index', this.collection.getMeta('z-base') + index + 1);
         return itemView.$el;
       }, this)
+
     );
     return this.$el;
   },
@@ -51,6 +72,7 @@ var CurCollectionView = Backbone.View.extend({
       $(this).css('top', offset.top + $(this).data('offset').top );
 
     });
+
   },
 
   detachEl: function (model) {

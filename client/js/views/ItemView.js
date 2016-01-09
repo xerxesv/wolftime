@@ -25,7 +25,7 @@ var ItemView = Backbone.View.extend({
       $(document).off('mousemove');
       var $theItem = $(this);
       var offset = $('#curCollection').length > 0 ? $('#curCollection').offset() : $('#controls').offset();
-      e.data.model.set('topLeftCoords', {x: $theItem.offset().left, y: $theItem.offset().top});
+      e.data.model.set('topLeftCoords', {x: $theItem.offset().left - offset.left, y: $theItem.offset().top - offset.top});
       e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: parseInt($theItem.css('z-index'))});
 
       $(this).data('offset', {left: $theItem.offset().left - offset.left, top: $theItem.offset().top - offset.top });
@@ -44,8 +44,8 @@ var ItemView = Backbone.View.extend({
     var img = new Image();
     img.src = './img/' + this.model.get('baseSrc');
     img.addEventListener('load', function (e) {
-      this.$el.css('min-width', e.target.width + 'px');
-      this.$el.css('min-height', e.target.height + 'px');
+      this.$el.css('width', e.target.width + 'px');
+      this.$el.css('height', e.target.height + 'px');
     }.bind(this) );
     this.$el.css('background-image', 'url("./img/' + this.model.get('baseSrc') + '")');
 

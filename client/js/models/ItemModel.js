@@ -8,6 +8,10 @@ var ItemModel = Backbone.Model.extend({
       x: 0,
       y: 0,
       z: 0
+    },
+    topLeftCoords: {
+      x: null,
+      y: null
     }
   },
 
