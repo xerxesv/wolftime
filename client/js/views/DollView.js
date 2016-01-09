@@ -2,6 +2,7 @@ var DollView = Backbone.View.extend({
 
 
   initialize: function () {
+    this.$el.html('');
     $dollContainer = $('<div id="dollContainer"></div>').appendTo(this.$el);
     $dollBG = $('<div id="dollBG"></div>').appendTo($dollContainer);
     this.render();
@@ -52,7 +53,6 @@ var DollView = Backbone.View.extend({
     var img = new Image();
     var $dollContainer = this.$el.children('#dollContainer');
     var $dollBG = $dollContainer.children('#dollBG');
-    $dollBG.html('');
 
     $dollDiv = $('<div class="dollDiv"></div>').appendTo($dollBG);
     $dollDiv.css('z-index', 50);

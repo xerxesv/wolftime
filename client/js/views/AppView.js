@@ -56,13 +56,11 @@ var AppView = Backbone.View.extend({
       console.log(newModelData);
       var oldDoll = doll;
       doll = new DollModel( {baseSrc: newModelData.baseSrc, name: newModelData.name} );
-
       _.each( oldDoll.get('clothing'), function (clothingType, key) {
         if (clothingType.items.length > 0) {
          this.model.get('collections')[key].add( clothingType.items.remove( clothingType.items.models ) );
         }
       }, this);
-      
       _.each(newModelData.clothing, function (clothingType, key) { // clothingType: [{},{} ...]
         if (clothingType.length > 0) {
 
@@ -74,13 +72,27 @@ var AppView = Backbone.View.extend({
           }, this);
         }
       }, this);
-
       delete oldDoll;
-      this.dollView.model = doll;
-      this.dollView.render();
+      this.dollView = new DollView({
+        model: doll,
+        el: $('#canvas')
+      });
 
-    }, this)
+      this.bindItemListeners();
+    
+    }, this);
 
+    this.bindItemListeners();
+
+    $(window).resize( function () {
+      if($('#curCollection').length > 0) {
+        this.curCollectionView.resize();
+      }
+    }.bind(this) );
+
+  },
+
+  bindItemListeners: function () {
     // Bind listeners to every ItemModel in every clothing collection on the AppModel
     _.each(this.model.get('collections'), function (collection, key) {
 
@@ -117,15 +129,7 @@ var AppView = Backbone.View.extend({
         }
       }, this);
     }, this);
-
-    $(window).resize( function () {
-      if($('#curCollection').length > 0) {
-        this.curCollectionView.resize();
-      }
-    }.bind(this) );
-
   },
-
 
   render: function () {
     this.$el.html('');
