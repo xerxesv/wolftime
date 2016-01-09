@@ -12,6 +12,9 @@ var AppModel = Backbone.Model.extend({
 
     this.set('curCollection', curCollection); 
 
+
   }
 
 });
+
+var appModel = new AppModel();

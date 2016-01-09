@@ -52,6 +52,34 @@ var AppView = Backbone.View.extend({
       this.curCollectionView.switchCollection(value);
     }, this);
 
+    this.model.on('changeDoll', function (newModelData) {
+      console.log(newModelData);
+      var oldDoll = doll;
+      doll = new DollModel( {baseSrc: newModelData.baseSrc, name: newModelData.name} );
+
+      _.each( oldDoll.get('clothing'), function (clothingType, key) {
+        if (clothingType.items.length > 0) {
+         this.model.get('collections')[key].add( clothingType.items.remove( clothingType.items.models ) );
+        }
+      }, this);
+      
+      _.each(newModelData.clothing, function (clothingType, key) { // clothingType: [{},{} ...]
+        if (clothingType.length > 0) {
+
+          _.each(clothingType, function (item, index) {
+
+            var removed = this.model.get('collections')[key].remove( this.model.get('collections')[key].findWhere({ name: item.name}) );
+            doll.get('clothing')[key].items.push( removed );
+
+          }, this);
+        }
+      }, this);
+
+      delete oldDoll;
+      this.dollView.model = doll;
+      this.dollView.render();
+
+    }, this)
 
     // Bind listeners to every ItemModel in every clothing collection on the AppModel
     _.each(this.model.get('collections'), function (collection, key) {
@@ -60,13 +88,10 @@ var AppView = Backbone.View.extend({
       var $region = this.dollView.$el.find('.region.' + key); // the region or regions on the doll corresponding to that clothing type (e.g., 'coats', etc.)
 
       collection.on('change:coords', function (model) {
-
         if (helpers.inBounds(model.get('coords'), $region) ){
-          console.log('in the region ');
-
           var clothingSlot = this.dollView.model.get('clothing')[key];
           if( clothingSlot.items.length === (clothingSlot.max || clothingSlot.regions.length) ) {
-            var removedItem = clothingSlot.items.shift()
+            var removedItem = clothingSlot.items.shift();
           }
           clothingSlot.items.push( collection.remove(model) );
         }
@@ -87,6 +112,7 @@ var AppView = Backbone.View.extend({
 
         $item = $('#' + model.get('name')).detach()
         if (this.model.get('curCollection').getMeta('type') === type) {
+          this.curCollectionView.$el.append($item);
           this.curCollectionView.render();
         }
       }, this);

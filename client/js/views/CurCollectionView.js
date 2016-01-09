@@ -11,10 +11,10 @@ var CurCollectionView = Backbone.View.extend({
     }
 
 
-    // this.collection.on("add", function (item) {
-    //   console.log('something added back to ', this.collection.getMeta('type'));
-    //   console.log(item)
-    // },this)   
+    this.collection.on("add", function (item) {
+      console.log('something added back to ', this.collection.getMeta('type'));
+      console.log(item)
+    },this);   
 
     this.render();
   },
@@ -37,15 +37,14 @@ var CurCollectionView = Backbone.View.extend({
         var itemView = new ItemView( {model: item});
         var offset = this.$el.offset();
         
+
+        console.log(itemView.model.get('name'), ': ', itemView.model.get('topLeftCoords').x, ',', itemView.model.get('topLeftCoords').y)
         if (itemView.model.get('topLeftCoords').x !== null || itemView.model.get('topLeftCoords').y !== null) {
-          console.log("itemView.model.get('topLeftCoords'): ", itemView.model.get('topLeftCoords').x, ',', itemView.model.get('topLeftCoords').y)
 
           itemView.$el.css('left', itemView.model.get('topLeftCoords').x + offset.left + 'px');          
           itemView.$el.css('top', itemView.model.get('topLeftCoords').y + offset.top + 'px');
 
         } else {
-          console.log('elementWidth: ', elementWidth);
-          console.log('offset:', offset.left, ',', offset.top);
 
           itemView.$el.css('left', offset.left + 20 + (Math.random() * (elementWidth - 150)) + 'px');
           itemView.$el.css('top', offset.top + 20 + (Math.floor(index / 5)) * 20 + 'px');

@@ -10,7 +10,8 @@ var ApiView = Backbone.View.extend({
   },
 
   events: {
-    'click #submit' : 'clickSubmit',
+    'click button#save' : 'clickSave',
+    'click button#retrieve' : 'clickRetrieve'
   },  
 
 
@@ -28,14 +29,56 @@ var ApiView = Backbone.View.extend({
       });
   },
 
-  clickSubmit: function () {
-    this.makeImage();
-    
-    this.model.trigger('submitClicked', {
-      name: this.$el.find('#username').val(), 
-      password: this.$el.find('#password').val(), 
-      imageURL: 'an image should be here'
-    });
+  clickRetrieve: function () {
+    var $name = this.$el.find('#username');
+    var $password = this.$el.find('#password');
+
+    if ( $name.val() && $password.val() ) {
+
+      $.ajax('api/' + $name.val(), {
+        method: 'POST',
+        processData: false,
+        contentType: 'application/json',
+        data: JSON.stringify({password: $password.val()}),
+
+        success: function (data, status, jqXHR) {
+          console.log(jqXHR.responseJSON);
+          appModel.trigger('changeDoll', jqXHR.responseJSON);
+        },
+
+        error: function (jqXHR, status, error) {
+          if (jqXHR.status === 401) {
+            alert('The wrong password for that wolfman! Don\'t try to hack a fursona that isn\'t yours!')
+          } else {
+            alert('A furry with that name does not exist in our database. Go ahead and create your own!');
+          }
+        }
+
+      });
+
+      // this.model.trigger('retrieveClicked', {
+      //   name: $name.val(), 
+      //   password: $password.val() 
+      // });
+    } else {
+      alert('Gotta have a name and a password!')
+    }    
+  },
+
+  clickSave: function () {
+    var $name = this.$el.find('#username');
+    var $password = this.$el.find('#password');
+    if ( $name.val() && $password.val() ) {
+      this.makeImage();
+      this.model.trigger('saveClicked', {
+        name: $name.val(), 
+        password: $password.val(), 
+        imageURL: 'an image should be here'
+      });
+    } else {
+      alert('Gotta have a name and a password!')
+    }
+
   },
 
   dudeSaved: function (imgURL) {
@@ -56,7 +99,6 @@ var ApiView = Backbone.View.extend({
       }) );      
     } else if (this.action === 'saved') {
       console.log(args.imgURL);
-      var compiled = _.template($('#savedTemplate').html());      
       this.$el.html( window.JST['savedTemplate']( {
         imgURL: args.imgURL
       }) );

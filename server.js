@@ -15,8 +15,11 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/client'));
 
 // Routing
-app.route('/save')
-  .post(handler.createOrUpdate);
+app.route('/api')
+  .post(handler.createWolf);
+
+app.route('/api/:name')
+  .post(handler.retrieveWolf);
 
 console.log('listening on port ', port);
 app.listen(port);

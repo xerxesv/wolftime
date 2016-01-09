@@ -21,7 +21,6 @@
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/underscore/underscore-min.js"></script>
     <script src="./lib/backbone/backbone-min.js"></script>
-    <script src="./lib/html2canvas/build/html2canvas.js"></script>
     <script src="./lib/dom-to-image.js"></script>
 
     <!-- Javascript sourcefiles -->
@@ -34,6 +33,7 @@
 
     <script src="./js/models/DollModel.js"></script>
     <script src="./js/models/AppModel.js"></script>
+
 
     <script src="./js/views/ItemView.js"></script>
     <script src="./js/views/DollView.js"></script>
@@ -76,7 +76,7 @@
     <script>
     $(document).ready(function () {
 
-      var appView = new AppView( { model: new AppModel(), el: $('#controls') } );
+      var appView = new AppView( { model: appModel, el: $('#controls') } );
 
     });
     </script>

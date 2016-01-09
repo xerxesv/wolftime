@@ -4,8 +4,6 @@ var DollView = Backbone.View.extend({
   initialize: function () {
     $dollContainer = $('<div id="dollContainer"></div>').appendTo(this.$el);
     $dollBG = $('<div id="dollBG"></div>').appendTo($dollContainer);
-    $dollDiv = $('<div class="dollDiv"></div>').appendTo($dollBG);
-    $dollDiv.css('z-index', 50);
     this.render();
 
     _.each(this.model.get('clothing'), function (clothingType) {
@@ -17,18 +15,7 @@ var DollView = Backbone.View.extend({
           return !helpers.inBounds(model.get('coords'), region);
         });
         if (outOfBounds) {
-          clothingType.items.remove(model)
-          // fire a remove event that appModel collections are listening for, passing the model and its el (find the el by jquery search of the model's name)
-          // listener is initialized in appView
-              // the listener puts the model in its proper collection
-              // the listener detaches the el from the DOM
-                // if the model name doesn't match the type of the current collection
-                  // the el simply disappears, maybe with some animation showing where it's going
-                // if the model matches the type of the current collection
-                  // the app view passes the el to CurCollectionView's' attachEl function, (maybe some animation)
-            // if this puts it in the currently selected collection, have the collection rerender (via a listener on CurCollection), maybe animate it going to its new position
-            // if it's not in the currently selected col, have it disappear (later with some kind of ok looking animation)
-
+          clothingType.items.remove(model);
         }    
       })
     });
@@ -61,10 +48,15 @@ var DollView = Backbone.View.extend({
   },
 
   render: function () {
+    console.log('doll attributes: ', this.model.attributes);
     var img = new Image();
     var $dollContainer = this.$el.children('#dollContainer');
     var $dollBG = $dollContainer.children('#dollBG');
-    var $dollDiv = $dollBG.children('.dollDiv');
+    $dollBG.html('');
+
+    $dollDiv = $('<div class="dollDiv"></div>').appendTo($dollBG);
+    $dollDiv.css('z-index', 50);
+
 
     img.src = './img/' + this.model.get('baseSrc');
     img.addEventListener('load', function (e) {
@@ -90,6 +82,14 @@ var DollView = Backbone.View.extend({
         $div.css('width', region[2] + 'px');
         $div.css('height', region[3] + 'px');
         $div.css('z-index', clothingType.items.getMeta('z-base'));
+
+        if (clothingType.items.length > 0) {
+          clothingType.items.each( function (item, index, collection) {
+            var itemView = new ItemView( {model: item} );
+            // itemView.$el.css('z-index', collection.getMeta('z-base') + index);
+            this.attachEl( itemView.$el, $div)            
+          }.bind(this) );
+        }
         $dollBG.append($div);
   
         if(clothingType.items.getMeta('z-base') < topOverlayZ ) {
@@ -106,8 +106,8 @@ var DollView = Backbone.View.extend({
 
         }
         
-      });
-    })
+      }, this);
+    }, this);
     return this.$el;
   },
 
