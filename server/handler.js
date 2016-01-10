@@ -15,9 +15,6 @@ exports.createWolf = function (req, res) {
           console.log(err);
         } else {
           console.log('new wolf created');
-          if (callback) {
-            callback(newWolf);
-          }
           res.status(201).send(req.body.imageURL);
         }
       });
