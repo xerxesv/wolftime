@@ -2,9 +2,6 @@ var DollView = Backbone.View.extend({
 
 
   initialize: function () {
-    this.$el.html('');
-    $dollContainer = $('<div id="dollContainer"></div>').appendTo(this.$el);
-    $dollBG = $('<div id="dollBG"></div>').appendTo($dollContainer);
     this.render();
 
     _.each(this.model.get('clothing'), function (clothingType) {
@@ -20,36 +17,20 @@ var DollView = Backbone.View.extend({
         }    
       })
     });
-    
-    var $overlays = $dollBG.children('.overlay');
+  },
 
-    if ($overlays.length > 0) {
-
-      $overlays.each( function (index, element) {
-        
-        $(this).on('mousedown', function(e) {
-          console.log('overlaymousedown triggered');
-          var name = $(this).attr('class').toString().split(' ')[1];
-
-          if( $dollBG.children('.region.'+name).children().length > 0) {
-            var jQueryMouseDown = jQuery.Event('mousedown', { pageX: e.pageX, pageY: e.pageY, offsetX: e.offsetX, offsetY: e.offsetY });
-            var $item = $dollBG.children('.region.'+name).children().first();
-
-            $item.trigger(jQueryMouseDown);
-
-            $(document).on('mouseup', function (docMouseUpEvent) {
-              $(document).off('mouseup');
-              $item.trigger('mouseup');
-            });
-          }
-          
-        });
-      })
-    }
+  switchDoll: function (newDoll) {
+    this.model = newDoll;
+    this.initialize();
   },
 
   render: function () {
     console.log('doll attributes: ', this.model.attributes);
+
+    this.$el.html('');
+    $dollContainer = $('<div id="dollContainer"></div>').appendTo(this.$el);
+    $dollBG = $('<div id="dollBG"></div>').appendTo($dollContainer);
+
     var img = new Image();
     var $dollContainer = this.$el.children('#dollContainer');
     var $dollBG = $dollContainer.children('#dollBG');
@@ -108,6 +89,29 @@ var DollView = Backbone.View.extend({
         
       }, this);
     }, this);
+
+    var $overlays = $dollBG.children('.overlay');
+
+    if ($overlays.length > 0) {
+      $overlays.each( function (index, element) {
+        $(this).on('mousedown', function(e) {
+          console.log('overlaymousedown triggered');
+          var name = $(this).attr('class').toString().split(' ')[1];
+
+          if( $dollBG.children('.region.'+name).children().length > 0) {
+            var jQueryMouseDown = jQuery.Event('mousedown', { pageX: e.pageX, pageY: e.pageY, offsetX: e.offsetX, offsetY: e.offsetY });
+            var $item = $dollBG.children('.region.'+name).children().first();
+
+            $item.trigger(jQueryMouseDown);
+
+            $(document).on('mouseup', function (docMouseUpEvent) {
+              $(document).off('mouseup');
+              $item.trigger('mouseup');
+            });
+          }
+        });
+      })
+    }
     return this.$el;
   },
 

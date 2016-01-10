@@ -13,38 +13,68 @@ var DollModel = Backbone.Model.extend({
 
   initialize: function () {
 
-    // this.on('retrieved', function (newModelData) {
+    this.on('saveClicked', this.saveWolf, this);
+  },
 
-    // })
+  saveWolf: function (args) {
+    this.set('name', args.name);
+    this.set('password', args.password);
+    this.set('imageURL', args.imageURL);
+    var data = this.toJSON();
+    $.ajax( 'api', {
+      method: 'POST',
+      processData: false,
+      data: JSON.stringify(data),
+      contentType:'application/json',
+      
+      success: function (imgURL, status, jqXHR) {
+        console.log('success sending post request with jquery ajax');
+        console.log(imgURL, status, jqXHR); 
+        this.trigger('dudeSaved', {imgURL: imgURL, action: 'saved'});
+      }.bind(this),
 
-    this.on('saveClicked', function (args) {
-      this.set('name', args.name);
-      this.set('password', args.password);
-      this.set('imageURL', args.imageURL);
-      $.ajax( 'api', {
-        method: 'POST',
-        processData: false,
-        data: this.toJSON(),
-        contentType:'application/json',
-        
-        success: function (data, status, jqXHR) {
-          console.log('success sending post request with jquery ajax');
-          console.log(data, status, jqXHR);
-          this.trigger('dudeSaved', data);
-        }.bind(this),
+      error: function (jqXHR, status, error) {
+        console.log('fail sending post request with jquery ajax');
+        console.log(jqXHR, status, error);
+        console.log('status: ', jqXHR.status); 
 
-        error: function (jqXHR, status, error) {
-          console.log('fail sending post request with jquery ajax');
-          console.log(jqXHR, status, error);
-          console.log('status: ', jqXHR.status); 
-          if (jqXHR.status===300) {
-            console.log(jqXHR.responseJSON);
-            alert('Somebody has already saved a furry dude with that name! Try something else.');
+        if (jqXHR.status===300) {
+          console.log(jqXHR.responseJSON);
+          // var password = prompt('Furry with that name found in our database! Enter password to update your creation.');
+          this.updateWolf(data);
+        }
+      }.bind(this)
+    });
+  },
+
+  updateWolf: function (args) {
+    console.log(args);
+    $.ajax('api/' + args.name, {
+      method: 'PUT',
+      processData: false,
+      data: JSON.stringify(args),
+      contentType:'application/json',
+
+      success: function (data, status, jqXHR) {
+        console.log('success updating wolf');
+        console.log(jqXHR.responseJSON);
+        this.trigger('dudeSaved', {imageURL: data.imageURL, action: 'updated'});
+      }.bind(this),
+
+      error: function (jqXHR, status, error) {
+        console.log('fail updateWolf');
+        console.log(jqXHR, status, error);
+        if (jqXHR.status === 401) {
+          var password = prompt('Furry with that name found in our database! But you have entered the wrong password. Enter the correct password?');
+          if (password !== null) {
+            args.password = password;
+            this.updateWolf(args);
           }
-        }.bind(this)
-      });
-    }, this);
-
+        } else {
+          console.log('An internal server error occured. Sorry :(');
+        }
+      }.bind(this)
+    });
   },
 
   toJSON: function () {
@@ -67,7 +97,7 @@ var DollModel = Backbone.Model.extend({
       });
     }, this);
 
-    return JSON.stringify(json);
+    return json;
   }
 
 });

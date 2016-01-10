@@ -94,6 +94,22 @@ db.wolfSchema2.methods.comparePassword = function (attemptedPassword, callback) 
   }
 };
 
+db.wolfSchema2.methods.updateOne = function (newData, callback) {
+  for (var key in this) {
+    this[key] = newData[key] || this[key];
+  }
+  this.save( function (err, newWolf) {
+    if (err) {
+      console.log('error saving the new wolf!');
+      console.log(err);
+      callback(err);
+    } else {
+      console.log('updated model instance: ');
+      console.log(newWolf);
+      callback(err, newWolf);
+    }
+  })
+}
 
 db.mongoose = mongoose;
 

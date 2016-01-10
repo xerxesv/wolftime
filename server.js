@@ -19,7 +19,8 @@ app.route('/api')
   .post(handler.createWolf);
 
 app.route('/api/:name')
-  .post(handler.retrieveWolf);
+  .post(handler.retrieveWolf)
+  .put(handler.updateWolf);
 
 console.log('listening on port ', port);
 app.listen(port);

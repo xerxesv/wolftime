@@ -73,11 +73,8 @@ var AppView = Backbone.View.extend({
         }
       }, this);
       delete oldDoll;
-      this.dollView = new DollView({
-        model: doll,
-        el: $('#canvas')
-      });
-
+      this.dollView.switchDoll(doll);
+      
       this.bindItemListeners();
     
     }, this);

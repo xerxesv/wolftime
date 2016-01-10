@@ -158,5 +158,8 @@ background-color: #036;
 
 }
 
+.dollItem {
+cursor: -moz-grab; cursor: -webkit-grab; cursor: grab;
+}
 
 

@@ -15,7 +15,7 @@ var ItemView = Backbone.View.extend({
     this.$el.on('mousedown', function (e) {
 
       var $theItem = $(this);
-
+      $theItem.css('cursor', 'grabbing');
       $(document).on('mousemove', function (mouseMoveE) {
         $theItem.offset({ top: mouseMoveE.pageY - e.offsetY, left: mouseMoveE.pageX - e.offsetX});
       });
@@ -24,6 +24,7 @@ var ItemView = Backbone.View.extend({
     this.$el.on('mouseup', {model: this.model }, function (e) {
       $(document).off('mousemove');
       var $theItem = $(this);
+      // $theItem.css('cursor', 'unset');
       var offset = $('#curCollection').length > 0 ? $('#curCollection').offset() : $('#controls').offset();
       e.data.model.set('topLeftCoords', {x: $theItem.offset().left - offset.left, y: $theItem.offset().top - offset.top});
       e.data.model.set('coords', {x: e.pageX, y: e.pageY, z: parseInt($theItem.css('z-index'))});

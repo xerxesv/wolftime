@@ -48,18 +48,12 @@ var ApiView = Backbone.View.extend({
 
         error: function (jqXHR, status, error) {
           if (jqXHR.status === 401) {
-            alert('The wrong password for that wolfman! Don\'t try to hack a fursona that isn\'t yours!')
+            alert('The wrong password for that wolfman. Don\'t try to hack a fursona that isn\'t yours!')
           } else {
             alert('A furry with that name does not exist in our database. Go ahead and create your own!');
           }
         }
-
       });
-
-      // this.model.trigger('retrieveClicked', {
-      //   name: $name.val(), 
-      //   password: $password.val() 
-      // });
     } else {
       alert('Gotta have a name and a password!')
     }    
@@ -81,11 +75,11 @@ var ApiView = Backbone.View.extend({
 
   },
 
-  dudeSaved: function (imgURL) {
-    this.action = 'saved';
-    console.log('your dude was saved');
-    console.log(imgURL);
-    this.render({imgURL: imgURL});
+  dudeSaved: function (args) {
+    this.action = args.action;
+    console.log('your dude was ', args.action);
+    console.log(args.imageURL);
+    this.render(args);
   },
 
 
@@ -97,10 +91,11 @@ var ApiView = Backbone.View.extend({
         action: this.action,
         string: this.action === 'save' ? 'share him/her with the world.' : 'modify him to suit your needs. '
       }) );      
-    } else if (this.action === 'saved') {
-      console.log(args.imgURL);
+    } else if (this.action === 'saved' || this.action === 'updated') {
+      console.log(args.imageURL);
       this.$el.html( window.JST['savedTemplate']( {
-        imgURL: args.imgURL
+        action: this.action,
+        imageURL: args.imageURL
       }) );
     }
 
