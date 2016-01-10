@@ -74,7 +74,8 @@ var AppView = Backbone.View.extend({
       }, this);
       delete oldDoll;
       this.dollView.switchDoll(doll);
-      
+
+      this.render();
       this.bindItemListeners();
     
     }, this);
